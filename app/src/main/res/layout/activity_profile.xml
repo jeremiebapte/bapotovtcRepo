@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_profile_drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.bapoto.vtc.ui.ProfileActivity"
+    tools:openDrawer="start">
+
+    <ImageView
+        android:id="@+id/profileImageView"
+        android:layout_width="111dp"
+        android:layout_height="95dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="99dp"
+        android:layout_marginEnd="152dp"
+        android:background="@drawable/ic_anon_user_48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck"
+        android:contentDescription="@string/imageprofile" />
+
+    <Button
+        android:id="@+id/allResaBtn"
+        android:layout_width="390dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="124dp"
+        android:gravity="center"
+        android:text="@string/mes_reservations"
+        android:textColor="#795548"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="278dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="251dp"
+        android:layout_marginEnd="59dp"
+        android:gravity="center"
+        android:text="@string/text_input_username"
+        android:textColor="@color/black"
+        android:textSize="@dimen/default_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:autofillHints=""
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:layout_width="278dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="74dp"
+        android:layout_marginTop="296dp"
+        android:layout_marginEnd="59dp"
+        android:gravity="center"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/chatButton"
+        android:layout_width="390dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="215dp"
+        android:gravity="center"
+        android:text="@string/demande_d_informations"
+        android:textColor="#795548"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.widget.Button
+        android:id="@+id/signOutButton"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="263dp"
+        android:layout_height="48dp"
+        android:layout_margin="@dimen/default_large_margin"
+        android:layout_marginStart="139dp"
+        android:layout_marginEnd="74dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/gradient_button"
+        android:gravity="center"
+        android:text="@string/button_sign_out_account"
+        android:textColor="@color/black"
+        android:textSize="@dimen/profile_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

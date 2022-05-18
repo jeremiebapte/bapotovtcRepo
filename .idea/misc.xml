@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1305" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable/baseline_account_circle_24.xml" value="0.1305" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable/baseline_grade_24.xml" value="0.1305" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable/gradient_button.xml" value="0.1305" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable/ic_anon_user_48dp.xml" value="0.1305" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable/ic_chat_message_background.xml" value="0.1305" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1305" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable/twotone_chat_bubble_24.xml" value="0.1105" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/drawable/twotone_source_24.xml" value="0.1105" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/activity_calculate_distance.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/activity_main.xml" value="0.16203703703703703" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/activity_profile.xml" value="0.22" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/activity_profile_menu_drawer.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/activity_profile_nav_header.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/activity_recap.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/activity_reservas.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/activity_reservation.xml" value="0.22" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/fragment_all_reservation.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/fragment_chat.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/fragment_page.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/fragment_profile.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/map_recap_activity.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/layout/reservas.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/menu/activity_profile_menu_drawer.xml" value="0.1796875" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Users/Jeremy/AndroidStudioProjects/bapotovtc2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/button_radius_error_color.xml" value="0.271" />
+        <entry key="app/src/main/res/drawable/ic_grey_search_24.xml" value="0.271" />
+        <entry key="app/src/main/res/drawable/ic_person.xml" value="0.271" />
+        <entry key="app/src/main/res/drawable/searcj.xml" value="0.271" />
+        <entry key="app/src/main/res/layout/activity_all_reservation.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_profile_nav_header.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/chat_profile.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/fragment_all_reservation.xml" value="0.19583333333333333" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/item.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/items.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/search_back.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/menu/activity_profile_menu_drawer.xml" value="0.37604166666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="FindBugsConfigurable">
+    <option name="make" value="true" />
+    <option name="effort" value="default" />
+    <option name="priority" value="Medium" />
+    <option name="excludeFilter" value="" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="SuppressionsComponent">
+    <option name="suppComments" value="[]" />
+  </component>
+</project>

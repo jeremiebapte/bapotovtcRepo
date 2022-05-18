@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/quantum_white_100"
+    tools:context="com.bapoto.vtc.ui.MainActivity">
+
+    <!--IMAGE VIEW BAPOTO VTC-->
+
+    <!-- TITLE BAPOTO VTC -->
+
+
+    <!-- BUTTONS CONTAINER -->
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="535dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/container_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/container_button"
+        android:layout_width="344dp"
+        android:layout_height="157dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- BUTTON LOGIN -->
+        <android.widget.Button
+
+            android:id="@+id/loginButton"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="296dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@drawable/gradient_button"
+            android:gravity="center"
+            android:text="@string/connexion"
+            android:textColor="@color/black"
+            android:textSize="@dimen/default_text_size"
+            android:textStyle="bold"
+
+            tools:layout_editor_absoluteX="48dp"
+            tools:layout_editor_absoluteY="551dp" />
+
+        <!-- BUTTON CHAT -->
+        <android.widget.Button
+
+            android:id="@+id/reservation_button"
+            style="@style/Widget.AppCompat.Button"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin"
+            android:background="@drawable/gradient_button"
+            android:gravity="center"
+            android:text="@string/button_reservation"
+            android:textColor="@color/black"
+            android:textSize="@dimen/default_text_size"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="48dp"
+            tools:layout_editor_absoluteY="629dp" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

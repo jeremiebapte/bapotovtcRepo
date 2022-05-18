@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "278583319054",
+    "firebase_url": "https://bapoto-733d2-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "bapoto-733d2",
+    "storage_bucket": "bapoto-733d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:278583319054:android:248661a05700531c613a5f",
+        "android_client_info": {
+          "package_name": "bapoto.vtc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "278583319054-1q827tckn87bt26h63alkd3n6pj8cbc9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bapoto.vtc",
+            "certificate_hash": "3b180cc7e1e20a9a59b393c0595f081247609a43"
+          }
+        },
+        {
+          "client_id": "278583319054-upfmp0if8sk4d1tp7c10lob0jfvbr39m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCosv7RiAjUpDY_94LAsRjYGdR9sj-kAAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "278583319054-upfmp0if8sk4d1tp7c10lob0jfvbr39m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

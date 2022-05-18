@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bapoto.vtc.ui.DevisActivity">
+
+
+    <Button
+        android:id="@+id/boutonNom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="110dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:padding="@dimen/padding_normal"
+        android:text="SUIVANT"
+        android:textSize="@dimen/default_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/ChampNom"
+        android:layout_width="305dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/default_margin_start"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/default_margin_end"
+
+        android:autofillHints="@string/app_name"
+        android:ems="10"
+        android:hint="  Nom / Prénom"
+        android:inputType="textPersonName"
+        android:padding="@dimen/padding_normal"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle" />
+
+    <EditText
+        android:id="@+id/ChampDestination"
+        android:layout_width="305dp"
+        android:layout_height="60dp"
+
+
+        android:layout_marginStart="@dimen/default_margin_start"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/default_margin_end"
+
+        android:ems="10"
+        android:hint="Destination"
+        android:inputType="textPostalAddress"
+        android:padding="@dimen/padding_normal"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ChampRDV" />
+
+    <EditText
+        android:id="@+id/ChampRDV"
+        android:layout_width="305dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/default_margin_start"
+
+
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/default_margin_end"
+
+        android:ems="10"
+        android:hint="  Adresse du RDV"
+        android:inputType="textPostalAddress"
+        android:padding="@dimen/padding_normal"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/champTel" />
+
+
+    <Button
+        android:id="@+id/datePickerButton"
+        style="?spinnerStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="@dimen/default_margin_top"
+        android:layout_marginEnd="228dp"
+        android:layout_marginBottom="144dp"
+        android:background="@color/yellow"
+        android:onClick="openDatePicker"
+        android:paddingStart="8dp"
+        android:text="01 JAN 2020"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ChampInfos"
+        app:layout_constraintVertical_bias="0.509"
+        tools:ignore="OnClick,RtlSymmetry" />
+
+    <Button
+        android:id="@+id/timeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginStart="206dp"
+        android:layout_marginTop="@dimen/default_margin_top"
+        android:layout_marginEnd="@dimen/default_margin_end"
+
+        android:layout_marginBottom="144dp"
+        android:hint="Heure du RDV"
+        android:onClick="popTimePicker"
+        android:padding="@dimen/padding_normal"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ChampInfos"
+        tools:ignore="OnClick" />
+
+    <EditText
+        android:id="@+id/champTel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_start"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="@dimen/default_margin_end"
+
+        android:ems="10"
+        android:hint="Téléphone"
+        android:inputType="phone"
+        android:maxLength="20"
+        android:padding="@dimen/padding_normal"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ChampNom" />
+
+    <EditText
+        android:id="@+id/ChampInfos"
+        android:layout_width="305dp"
+        android:layout_height="90dp"
+        android:layout_marginStart="@dimen/default_margin_start"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/default_margin_end"
+        android:ems="10"
+        android:hint="Infos complémentaires"
+        android:inputType="textMultiLine"
+        android:maxLength="100"
+        android:padding="@dimen/padding_normal"
+        android:paddingStart="10dp"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ChampDestination" />
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="337dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="@dimen/default_margin_start"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="@dimen/default_margin_end"
+        android:fontFamily="@font/bungee"
+        android:text="@string/mon_deviss"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

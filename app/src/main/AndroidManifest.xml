@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.bapoto.bapoto">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_descriptor"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Bapotovtc">
+        <activity
+            android:name="com.bapoto.vtc.fragments.AllReservation"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.BonDeDevis"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Bapotovtc.NoActionBar" />
+        <activity
+            android:name="com.bapoto.vtc.ui.DevisActivity"
+            android:label="@string/toolbar_title_devis_activity"
+            android:parentActivityName="com.bapoto.vtc.ui.ReservationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.bapoto.vtc.ui.RecapActivity"
+            android:parentActivityName="com.bapoto.vtc.ui.ReservationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Bapotovtc.NoActionBar" />
+
+        <activity android:name="com.bapoto.vtc.ui.ChatActivity"
+            android:parentActivityName="com.bapoto.vtc.ui.MainActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name="com.bapoto.vtc.ui.ReservationActivity"
+            android:label="@string/toolbar_title_reservation_activity"
+            android:parentActivityName="com.bapoto.vtc.ui.MainActivity"
+            android:screenOrientation="portrait" /> <!-- android:theme="@style/Theme.Bapotovtc.NoActionBar" /> -->
+        <activity
+            android:name="com.bapoto.vtc.ui.ProfileActivity"
+            android:label="@string/toolbar_title_login_activity"
+            android:parentActivityName="com.bapoto.vtc.ui.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Bapotovtc.NoActionBar" />
+        <activity
+            android:name="com.bapoto.vtc.ui.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Bapotovtc.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.bapoto.vtc.notification.NotificationsService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCeIMI4poUlq820kUbhLK7MvVQ02O3BR-Y" />
+    </application>
+
+</manifest>

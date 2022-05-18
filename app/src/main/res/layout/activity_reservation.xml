@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context="com.bapoto.vtc.ui.ReservationActivity">
+
+        <!--        android:id="@+id/boutonNom"-->
+
+
+        <android.widget.Button
+
+            android:id="@+id/resaButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/gradient_button"
+            android:gravity="center"
+            android:padding="@dimen/padding_normal"
+            android:text="SUIVANT"
+            android:textSize="@dimen/default_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/datePickerButton" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="50dp"
+            android:hint="Nom/ Prénom"
+            app:helperText="Obligatoire *"
+            app:helperTextTextColor="@color/com_smart_login_code"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+            app:startIconDrawable="@drawable/fui_ic_anonymous_white_24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputName"
+                android:layout_width="300dp"
+                android:layout_height="55dp"
+                android:inputType="number"
+                tools:layout_editor_absoluteX="37dp"
+                tools:layout_editor_absoluteY="129dp" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextDestination"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="50dp"
+            android:hint="Destination"
+            app:helperText="Obligatoire *"
+            app:helperTextTextColor="@color/com_smart_login_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextPickUp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputDestination"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextPickUp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="50dp"
+            android:hint="Adresse du RDV"
+            app:helperText="Obligatoire *"
+
+            app:helperTextTextColor="@color/com_smart_login_code"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextPhone">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputPickUp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/datePickerButton"
+            style="?spinnerStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/yellow"
+            android:onClick="openDatePicker"
+            android:paddingStart="8dp"
+            android:text="01 JAN 2020"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/resaButton"
+            app:layout_constraintEnd_toStartOf="@+id/timeButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textInfo"
+            tools:ignore="OnClick,RtlSymmetry" />
+
+
+        <Button
+            android:id="@+id/timeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="32dp"
+            android:background="@color/yellow"
+            android:hint="Heure du RDV"
+            android:onClick="popTimePicker"
+            android:padding="@dimen/padding_normal"
+            android:textSize="@dimen/default_text_size"
+
+            app:layout_constraintBottom_toTopOf="@id/resaButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/datePickerButton"
+            app:layout_constraintTop_toBottomOf="@id/textInfo"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="OnClick" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/TextPhone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="50dp"
+            android:hint="Téléphone"
+            app:helperText="Obligatoire *"
+            app:helperTextTextColor="@color/com_smart_login_code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextName"
+            app:startIconDrawable="@drawable/fui_ic_phone_white_24dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputPhone"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInfo"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="50dp"
+            android:hint="@string/infos_compl_mentaires"
+            app:counterEnabled="true"
+            app:counterMaxLength="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/TextDestination">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputInfo"
+                android:layout_width="300dp"
+                android:layout_height="122dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="310dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="69dp"
+            android:fontFamily="@font/bungee"
+            android:gravity="center"
+            android:text="@string/ma_reservation"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
