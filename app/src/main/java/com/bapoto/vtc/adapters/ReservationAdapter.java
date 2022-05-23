@@ -36,7 +36,7 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
         return new ReservationHolder(v);
     }
 
-    class ReservationHolder extends RecyclerView.ViewHolder {
+    static class ReservationHolder extends RecyclerView.ViewHolder {
         TextView tvPickUP;
         TextView tvDestination;
         TextView tvDate;

@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bapotovtc">
         <activity
-            android:name="com.bapoto.vtc.fragments.AllReservation"
+            android:name="com.bapoto.vtc.ui.SuccessReservationActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.AllReservation"
             android:exported="false" />
         <activity
             android:name="com.bapoto.vtc.ui.BonDeDevis"
@@ -32,11 +35,10 @@
             android:parentActivityName="com.bapoto.vtc.ui.ReservationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Bapotovtc.NoActionBar" />
-
-        <activity android:name="com.bapoto.vtc.ui.ChatActivity"
+        <activity
+            android:name="com.bapoto.vtc.ui.ChatActivity"
             android:parentActivityName="com.bapoto.vtc.ui.MainActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.bapoto.vtc.ui.ReservationActivity"
             android:label="@string/toolbar_title_reservation_activity"

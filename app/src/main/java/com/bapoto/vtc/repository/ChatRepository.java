@@ -1,10 +1,19 @@
 package com.bapoto.vtc.repository;
 
+import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
+
+import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.bapoto.vtc.manager.UserManager;
 import com.bapoto.vtc.model.Message;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
@@ -60,6 +69,7 @@ public final class ChatRepository {
                     .collection(MESSAGE_COLLECTION)
                     .add(message);
         });
+
 
     }
 

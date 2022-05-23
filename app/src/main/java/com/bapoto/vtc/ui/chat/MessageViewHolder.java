@@ -23,19 +23,19 @@ import java.util.Locale;
 
 public class MessageViewHolder extends RecyclerView.ViewHolder {
 
-    private ItemChatBinding binding;
+    private final ItemChatBinding binding;
 
     private final int colorCurrentUser;
     private final int colorRemoteUser;
 
-    private boolean isSender;
+    private final boolean isSender;
 
     public MessageViewHolder(@NonNull View itemView, boolean isSender) {
         super(itemView);
         this.isSender = isSender;
         binding = ItemChatBinding.bind(itemView);
 
-        // Setup default colros
+        // Setup default colors
         colorCurrentUser = ContextCompat.getColor(itemView.getContext(), R.color.colorAccent);
         colorRemoteUser = ContextCompat.getColor(itemView.getContext(), R.color.colorPrimary);
     }

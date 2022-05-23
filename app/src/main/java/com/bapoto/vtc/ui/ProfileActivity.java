@@ -15,7 +15,6 @@ import androidx.appcompat.app.AlertDialog;
 
 import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityProfileBinding;
-import com.bapoto.vtc.fragments.AllReservation;
 import com.bapoto.vtc.manager.ChatManager;
 import com.bapoto.vtc.manager.UserManager;
 import com.bumptech.glide.Glide;

@@ -2,23 +2,19 @@ package com.bapoto.vtc.ui;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 
-import com.bapoto.bapoto.databinding.ActivityMainBinding;
 import com.bapoto.bapoto.R;
-import com.bapoto.vtc.fragments.AllReservation;
+import com.bapoto.bapoto.databinding.ActivityMainBinding;
 import com.bapoto.vtc.manager.UserManager;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.ErrorCodes;
@@ -30,7 +26,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 

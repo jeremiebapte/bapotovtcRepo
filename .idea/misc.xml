@@ -38,13 +38,18 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30932971014492755" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_profile_nav_header.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/activity_recap.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layout/activity_succes_reservation.xml" value="0.1453125" />
         <entry key="app/src/main/res/layout/chat_profile.xml" value="0.30932971014492755" />
         <entry key="app/src/main/res/layout/fragment_all_reservation.xml" value="0.19583333333333333" />
         <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.30932971014492755" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.30932971014492755" />
         <entry key="app/src/main/res/layout/item.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/item_chat.xml" value="0.15416666666666667" />
+        <entry key="app/src/main/res/layout/item_reservation.xml" value="0.30932971014492755" />
         <entry key="app/src/main/res/layout/items.xml" value="0.30932971014492755" />
         <entry key="app/src/main/res/layout/search_back.xml" value="0.30932971014492755" />
+        <entry key="app/src/main/res/layout/success_reservation.xml" value="0.30932971014492755" />
         <entry key="app/src/main/res/menu/activity_profile_menu_drawer.xml" value="0.37604166666666666" />
       </map>
     </option>

@@ -14,9 +14,11 @@ public class Reservation {
      private String date;
      @Nullable
      private String infos;
+     private User sender;
 
     public Reservation() {
     }
+
 
     public Reservation(String name, String telephone, @Nullable String email, String pickUp, String destination,
                        String hour, String date, @Nullable String infos) {
@@ -30,12 +32,23 @@ public class Reservation {
         this.infos = infos;
     }
 
+    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, User sender) {
+    }
+
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
     }
 
     public String getTelephone() {

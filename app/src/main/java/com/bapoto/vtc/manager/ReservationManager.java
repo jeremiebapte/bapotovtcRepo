@@ -1,16 +1,14 @@
 package com.bapoto.vtc.manager;
 
-import com.bapoto.vtc.model.Reservation;
 import com.bapoto.vtc.repository.ReservationRepository;
-
-import java.util.UUID;
 
 public class ReservationManager {
     private static volatile ReservationManager instance;
     private final ReservationRepository reservationRepository;
 
 
-    public ReservationManager( ) { reservationRepository =  new ReservationRepository();
+    public ReservationManager() {
+        reservationRepository = ReservationRepository.getInstance();
     }
 
     public static ReservationManager getInstance() {
@@ -18,7 +16,7 @@ public class ReservationManager {
         if (result != null) {
             return result;
         }
-        synchronized(ReservationRepository.class) {
+        synchronized (ReservationRepository.class) {
             if (instance == null) {
                 instance = new ReservationManager();
             }
@@ -26,22 +24,18 @@ public class ReservationManager {
         }
     }
 
-  /*  public void createReservation(String nom,String tel,String desti,String rdv,String date,
-                                  String heure,String infos) {
+    public void createReservation(String nom, String tel, String desti, String rdv, String date,
+                                  String heure, String infos) {
+        reservationRepository.createReservation(nom,tel,desti,rdv,date,heure,infos);
+    }
 
-        Reservation reservation = new Reservation();
-        nom = reservation.getName();
-        tel = reservation.getTelephone();
-        desti = reservation.getDestination();
-        rdv = reservation.getRdv();
-        date = reservation.getDate();
-        heure = reservation.getHour();
-        infos = reservation.getInfos();
+    public void getAllUserReservation( ){
 
-        reservationRepository.createReservation(nom, tel, desti, rdv, date, heure, infos);*/
+        reservationRepository.getCurrentUserReservations();
 
 
     }
+}
 
 
 
