@@ -4,35 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black">
+    android:background="@color/white">
 
 
     <ImageView
-        android:layout_width="314dp"
-        android:layout_height="277dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginEnd="49dp"
         android:id="@+id/bapologoIv"
-        android:background="@drawable/logobapo"
+        android:layout_width="258dp"
+        android:layout_height="249dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="49dp"
+        android:background="@drawable/tool_logo"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <TextView
         android:id="@+id/sloganTv"
-        android:layout_width="380dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="81dp"
-        android:fontFamily="@font/bungee"
+        android:layout_width="347dp"
+        android:layout_height="71dp"
+        android:layout_marginBottom="236dp"
+        android:fontFamily="@font/ubuntu_regular"
         android:gravity="center"
-        android:text="RESERVATION ENVOYEE "
+        android:text="Réservation envoyée
+        avec succès"
         android:textColor="@color/yellow"
         android:textSize="30sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

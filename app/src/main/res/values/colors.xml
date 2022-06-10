@@ -5,18 +5,26 @@
     <color name="white">#FFFFFFFF</color>
     <color name="yellow">#FFD700</color>
     <color name="grey">#808080</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
 
 
-        <color name="colorPrimary">#FFD700</color>
-        <color name="colorPrimaryDark">#FFD700</color>
+        <color name="primary">#FFD700</color>
+        <color name="primary_dark">#A1913D</color>
         <color name="colorAccent">#FFA000</color>
         <color name="colorError">#FF5252</color>
 
-        <color name="colorGreen">#6BB18C</color>
+    <color name="input_background">#ECECEC</color>
+    <color name="icon_background">#20FFFFFF</color>
+    <color name="error">#B00020</color>
+    <color name="received_message_background">#090D16</color>
+
+        <color name="green">#6BB18C</color>
         <color name="colorSandLight">#ECDAAF</color>
         <color name="colorSand">#EBCB94</color>
+    <color name="brown">#795548</color>
 
-<array name="colorPagesViewPager">
+    <array name="colorPagesViewPager">
     <item>#ECDAAF</item>
     <item>#EBCB94</item>
 

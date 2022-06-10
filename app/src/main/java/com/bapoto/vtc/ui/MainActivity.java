@@ -1,9 +1,5 @@
 package com.bapoto.vtc.ui;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -12,29 +8,33 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 
 import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityMainBinding;
-import com.bapoto.vtc.manager.UserManager;
-import com.firebase.ui.auth.AuthUI;
-import com.firebase.ui.auth.ErrorCodes;
-import com.firebase.ui.auth.IdpResponse;
+import com.bapoto.vtc.utilities.Constants;
+import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.messaging.FirebaseMessaging;
 
-import java.util.Collections;
-import java.util.List;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> implements LocationListener {
     private LocationManager lm;
     private static final int RC_SIGN_IN = 123;
     private static final int PERMS_CALL = 7;
-    private final UserManager userManager = UserManager.getInstance();
+    private PreferenceManager preferenceManager;
+
     private MapFragment mapFragment;
     private GoogleMap googleMap;
 
@@ -47,6 +47,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements L
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupListeners();
+        getToken();
+        preferenceManager = new PreferenceManager(this);
         FragmentManager fragmentManager = getFragmentManager();
         mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
     }
@@ -55,7 +57,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements L
     @Override
     protected void onResume() {
         super.onResume();
-        updateLoginButton();
         checkPermissions();
     }
 
@@ -67,12 +68,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements L
         }
     }
 
-    // Update Login Button when activity is resuming
-    private void updateLoginButton(){
-        binding.loginButton.setText(userManager.isCurrentUserLogged()?
-                getString(R.string.button_login_text_logged) :
-                getString(R.string.button_login_text_not_logged));
+    private void setupListeners(){
+        // Login/Profile Button
+        binding.loginButton.setOnClickListener(view -> startProfileActivity());
+
+        // Reservation Button
+        binding.reservationButton.setOnClickListener(view -> startReservationActivity());
+        //
     }
+
 
     // Launching Profile Activity
     private void startProfileActivity(){
@@ -80,90 +84,35 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements L
         startActivity(intent);
     }
 
-    private void setupListeners(){
-        // Login/Profile Button
-        binding.loginButton.setOnClickListener(view -> {
-            if(userManager.isCurrentUserLogged()) {
-               startProfileActivity();
-            }else{
-                startSignInActivity();
-            }
-        });
-
-        // Reservation Button
-        binding.reservationButton.setOnClickListener(view -> {
-            if(userManager.isCurrentUserLogged()){
-                startReservationActivity();
-            }else{
-                showSnackBar(getString(R.string.error_not_connected));
-            }
-        });
-    }
-
-
-    // Signin activity handled by Google
-    private void startSignInActivity(){
-
-        // Choose authentication providers
-
-        List<AuthUI.IdpConfig> providers = Collections.singletonList(
-                new AuthUI.IdpConfig.EmailBuilder().build());
-
-        // Launch the activity
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setTheme(R.style.LoginTheme)
-                        .setAvailableProviders(providers)
-                        .setIsSmartLockEnabled(false, true)
-                        .setLogo(R.drawable.bapologo_w)
-                        .build(),
-                        RC_SIGN_IN);
-    }
-
     private void startReservationActivity(){
         Intent intent = new Intent(this, ReservationActivity.class);
         startActivity(intent);
     }
-    // Show Snack Bar with a message
-    private void showSnackBar( String message){
-        Snackbar.make(binding.layoutMain, message, Snackbar.LENGTH_SHORT).show();
+
+    private void getToken(){
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        this.handleResponseAfterSignIn(requestCode, resultCode, data);
+    private void updateToken(String token) {
+        preferenceManager.putString(Constants.KEY_FCM_TOKEN,token);
+        FirebaseFirestore database = FirebaseFirestore.getInstance();
+        DocumentReference documentReference =
+                database.collection(Constants.KEY_COLLECTION_USERS)
+                        .document(preferenceManager.getString(Constants.KEY_USER_ID)
+                        );
+        documentReference.update(Constants.KEY_FCM_TOKEN,token)
+                .addOnFailureListener( e -> showToast("Echec mis à jour du token"));
     }
 
-    // Method that handles response after SignIn Activity close
-    private void handleResponseAfterSignIn(int requestCode, int resultCode, Intent data){
-
-        IdpResponse response = IdpResponse.fromResultIntent(data);
-
-        if (requestCode == RC_SIGN_IN) {
-            // SUCCESS
-            if (resultCode == RESULT_OK) {
-                userManager.createUser();
-                showSnackBar(getString(R.string.connection_succeed));
-            } else {
-                // ERRORS
-                if (response == null) {
-                    showSnackBar(getString(R.string.error_authentication_canceled));
-                } else if (response.getError()!= null) {
-                    if(response.getError().getErrorCode() == ErrorCodes.NO_NETWORK){
-                        showSnackBar(getString(R.string.error_no_internet));
-                    } else if (response.getError().getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
-                        showSnackBar(getString(R.string.error_unknown_error));
-                    }
-                }
-            }
-        }
+    private void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
 
     //-------------
     // MAP
     //-------------
+
 
     //Method for Check the permission for connect to GPS
     private void checkPermissions() {

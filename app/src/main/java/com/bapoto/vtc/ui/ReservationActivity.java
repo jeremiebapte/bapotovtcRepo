@@ -1,137 +1,95 @@
 package com.bapoto.vtc.ui;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bapoto.bapoto.R;
-import com.bapoto.vtc.manager.ReservationManager;
-import com.bapoto.vtc.manager.UserManager;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.bapoto.bapoto.databinding.ActivityReservationBinding;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
+import java.util.Objects;
 
 public class ReservationActivity extends AppCompatActivity {
-    private final UserManager userManager = UserManager.getInstance();
-    private final ReservationManager reservationManager = ReservationManager.getInstance();
 
+    private ActivityReservationBinding binding;
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     Button timeButton;
-    int hour, minute;
+    private int hour, minute;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reservation);
+        binding = ActivityReservationBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         initDatepicker();
-        updateUIWithUserData();
-        dateButton = findViewById(R.id.datePickerButton);
+        setListeners();
+        dateButton = binding.datePickerButton;
         dateButton.setText(getTodayDate());
-        timeButton = findViewById(R.id.timeButton);
-
-
-        Button button = findViewById(R.id.resaButton);
-        EditText saisieNom = findViewById(R.id.inputName);
-        EditText saisieTel = findViewById(R.id.inputPhone);
-        EditText saisieDestination = findViewById(R.id.inputDestination);
-        EditText saisieRdv = findViewById(R.id.inputPickUp);
-        //Button saisieDate = findViewById(R.id.datePickerButton);
-        //Button saisieHeure = findViewById(R.id.timeButton);
-        EditText saisieInfos = findViewById(R.id.inputInfo);
-
-        button.setOnClickListener(view -> {
-            //Champs Obligatoire
-            String nom = saisieNom.getText().toString();
-            String tel = saisieTel.getText().toString();
-            String desti = saisieDestination.getText().toString();
-            String rdv = saisieRdv.getText().toString();
-            String date = dateButton.getText().toString();
-            String heure = timeButton.getText().toString();
-            String infos = saisieInfos.getText().toString();
-
-            if (nom.isEmpty()) {
-                presentModal("Veuillez saisir votre Nom");
-                return;
-            }
-            if (tel.isEmpty()) {
-                presentModal("Veuillez saisir votre Numéro de Téléphone");
-                return;
-            }
-            if (desti.isEmpty()) {
-                presentModal("Veuillez saisir votre Destination");
-                return;
-            }
-            if (rdv.isEmpty()) {
-                presentModal("Veuillez saisir le Lieu du RDV");
-                return;
-            }
-            if (date.isEmpty()) {
-                presentModal("Veuillez saisir la Date");
-                return;
-            }
-            if (heure.isEmpty()) {
-                presentModal("Veuillez saisir l'Heure");
-                return;
-            }
-
-
-            navigateToSummary(nom, tel, desti, rdv, date, heure, infos);
-
-
-        });
-
-
-
-                    }
-
-
-
-
-
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.reservation_menu, menu);
-        return true;
+        timeButton = binding.timeButton;
+        timeButton.setHintTextColor(getResources().getColor(R.color.black));
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_points) {
-            Intent intent = new Intent(this, DevisActivity.class);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }*/
+    private void setListeners() {
+        binding.resaButton.setOnClickListener(view -> {
+            if (isValidReservationDetails()) {
+                navigateToSummary();
+            }
+        });
+    }
 
-    private void navigateToSummary(String nom, String tel, String destination, String rdv,
-                                   String date, String heure, String infos) {
-        Intent intent = new Intent(ReservationActivity.this, RecapActivity.class);
+
+
+    private Boolean isValidReservationDetails() {
+
+        if (Objects.requireNonNull(binding.inputName.getText()).toString().isEmpty()) {
+            presentModal("Veuillez saisir votre nom");
+            return false;
+        } else if (Objects.requireNonNull(binding.inputPhone.getText()).toString().isEmpty()) {
+            presentModal("Veuillez saisir votre numéro de téléphone");
+            return false;
+        } else if (Objects.requireNonNull(binding.inputPickUp.getText()).toString().isEmpty()) {
+            presentModal("Veuillez saisir le lieu du RDV");
+            return false;
+        } else if (Objects.requireNonNull(binding.inputDropOff.getText()).toString().isEmpty()) {
+            presentModal("Veuillez saisir la destination");
+            return false;
+        } else if (binding.datePickerButton.getText().toString().isEmpty()) {
+            presentModal("Veuillez saisir la date");
+            return false;
+        } else if (binding.timeButton.getText().toString().isEmpty()) {
+            presentModal("Veuillez saisir l'heure");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void navigateToSummary() {
+        String nom = binding.inputName.getText().toString();
+        String tel = binding.inputPhone.getText().toString();
+        String desti = binding.inputDropOff.getText().toString();
+        String rdv = binding.inputPickUp.getText().toString();
+        String  date = binding.datePickerButton.getText().toString();
+        String heure = binding.timeButton.getText().toString();
+        String infos = binding.inputInfo.getText().toString();
+        Intent intent = new Intent(ReservationActivity.this, SummaryActivity.class);
 
         intent.putExtra("nomprenom", nom);
         intent.putExtra("tel", tel);
-        intent.putExtra("destination", destination);
+        intent.putExtra("destination", desti);
         intent.putExtra("rdv", rdv);
         intent.putExtra("date", date);
         intent.putExtra("heure", heure);
@@ -153,7 +111,7 @@ public class ReservationActivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener dateSetListener = (view, day, month, year) -> {
             month = month + 1;
             String date = makeDateString(day, month, year);
-            dateButton.setText(date);
+            binding.datePickerButton.setText(date);
         };
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -199,7 +157,7 @@ public class ReservationActivity extends AppCompatActivity {
     }
 
     public void openDatePicker(View view) {
-        datePickerDialog.show();
+       datePickerDialog.show();
     }
 
     private void presentModal(String message) {
@@ -236,15 +194,12 @@ public class ReservationActivity extends AppCompatActivity {
         saisieNom.setText(username);
     }
 
-    private void updateUIWithUserData() {
-        if (userManager.isCurrentUserLogged()) {
-            FirebaseUser user = userManager.getCurrentUser();
-
-
-            setTextUserData(user);
-            //getUserData();
-        }
+    private void startSummaryActivity() {
+        Intent intent = new Intent(this,SummaryActivity.class);
+        startActivity(intent);
     }
+
+
 
 
 }

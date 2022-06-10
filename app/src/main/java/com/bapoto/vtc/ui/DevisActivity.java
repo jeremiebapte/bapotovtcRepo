@@ -16,14 +16,14 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.bapoto.bapoto.R;
-import com.bapoto.vtc.manager.UserManager;
+
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 import java.util.Locale;
 
 public class DevisActivity extends AppCompatActivity {
-    private final UserManager userManager = UserManager.getInstance();
+
     private EditText editText;
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
@@ -36,7 +36,7 @@ public class DevisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_devis);
         initDatepicker();
-        updateUIWithUserData();
+
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodayDate());
         timeButton = findViewById(R.id.timeButton);
@@ -219,15 +219,7 @@ public class DevisActivity extends AppCompatActivity {
         saisieNom.setText(username);
     }
 
-    private void updateUIWithUserData() {
-        if (userManager.isCurrentUserLogged()) {
-            FirebaseUser user = userManager.getCurrentUser();
 
-
-            setTextUserData(user);
-            //getUserData();
-        }
-    }
 }
 
 

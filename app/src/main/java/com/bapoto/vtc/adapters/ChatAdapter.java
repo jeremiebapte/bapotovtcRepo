@@ -1,66 +1,109 @@
 package com.bapoto.vtc.adapters;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.bapoto.bapoto.R;
-import com.bapoto.vtc.manager.UserManager;
-import com.bapoto.vtc.model.Message;
-import com.bapoto.vtc.model.User;
-import com.bapoto.vtc.ui.chat.MessageViewHolder;
-import com.bumptech.glide.RequestManager;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.database.FirebaseDatabase;
+import com.bapoto.bapoto.databinding.ItemContainerReceivedMessageBinding;
+import com.bapoto.bapoto.databinding.ItemContainerSentMessageBinding;
+import com.bapoto.vtc.model.ChatMessage;
 
-public class ChatAdapter extends FirestoreRecyclerAdapter<Message, MessageViewHolder> {
+import java.util.List;
 
-    public interface Listener {
-        void onDataChanged();
-    }
+public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    // VIEW TYPES
-    private static final int SENDER_TYPE = 1;
-    private static final int RECEIVER_TYPE = 2;
+    private final List<ChatMessage> chatMessages;
+    private final Bitmap receiverProfileImage;
+    private final String senderId;
 
-    private final RequestManager glide;
+    public static final int VIEW_TYPE_SENT = 1;
+    public static final int VIEW_TYPE_RECEIVED = 2;
 
-    private final Listener callback;
-
-    public ChatAdapter(@NonNull FirestoreRecyclerOptions<Message> options, RequestManager glide, Listener callback) {
-        super(options);
-        this.glide = glide;
-        this.callback = callback;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        // Determine the type of the message by if the user is the sender or not
-        String currentUserId = UserManager.getInstance().getCurrentUser().getUid();
-
-        boolean isSender = getItem(position).getUserSender().getUid().equals(currentUserId);
-
-        return (isSender) ? SENDER_TYPE : RECEIVER_TYPE;
-    }
-
-    @Override
-    protected void onBindViewHolder(@NonNull MessageViewHolder holder, int position, @NonNull Message model) {
-        holder.itemView.invalidate();
-        holder.updateWithMessage(model, this.glide);
+    public ChatAdapter(List<ChatMessage> chatMessages, Bitmap receiverProfileImage, String senderId) {
+        this.chatMessages = chatMessages;
+        this.receiverProfileImage = receiverProfileImage;
+        this.senderId = senderId;
     }
 
     @NonNull
     @Override
-    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MessageViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_chat, parent, false), viewType == 1);
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == VIEW_TYPE_SENT) {
+            return new  SentMessageViewHolder(
+                    ItemContainerSentMessageBinding.inflate(
+                            LayoutInflater.from(parent.getContext()),
+                            parent,
+                            false
+                    )
+            );
+        }else {
+            return new ReceivedMessageViewHolder(
+                    ItemContainerReceivedMessageBinding.inflate(
+                            LayoutInflater.from(parent.getContext()),
+                            parent,
+                            false
+                            )
+            );
+        }
+
     }
 
     @Override
-    public void onDataChanged() {
-        super.onDataChanged();
-        this.callback.onDataChanged();
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        if (getItemViewType(position) == VIEW_TYPE_SENT) {
+            ((SentMessageViewHolder)holder).setDate(chatMessages.get(position));
+        } else {
+            ((ReceivedMessageViewHolder)holder).setData(chatMessages.get(position),receiverProfileImage);
+        }
     }
+
+    @Override
+    public int getItemCount() {
+        return chatMessages.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (chatMessages.get(position).senderId.equals(senderId)) {
+            return VIEW_TYPE_SENT;
+        } else {
+            return VIEW_TYPE_RECEIVED;
+        }
+    }
+
+    static class SentMessageViewHolder extends RecyclerView.ViewHolder {
+
+        private final ItemContainerSentMessageBinding binding;
+
+        SentMessageViewHolder(ItemContainerSentMessageBinding itemContainerSentMessageBinding) {
+            super(itemContainerSentMessageBinding.getRoot());
+            binding = itemContainerSentMessageBinding;
+        }
+
+        void setDate(ChatMessage chatMessage) {
+            binding.textMessage.setText(chatMessage.message);
+            binding.textDateTime.setText(chatMessage.dateTime);
+        }
+    }
+
+    static class ReceivedMessageViewHolder extends RecyclerView.ViewHolder {
+
+        private final ItemContainerReceivedMessageBinding binding;
+
+        ReceivedMessageViewHolder(ItemContainerReceivedMessageBinding itemContainerReceivedMessageBinding) {
+            super(itemContainerReceivedMessageBinding.getRoot());
+            binding = itemContainerReceivedMessageBinding;
+        }
+
+        void setData(ChatMessage chatMessage, Bitmap receiverProfileImage) {
+            binding.textMessage.setText(chatMessage.message);
+            binding.textDateTime.setText(chatMessage.dateTime);
+            binding.imageProfile.setImageBitmap(receiverProfileImage);
+        }
+    }
+
+
 }

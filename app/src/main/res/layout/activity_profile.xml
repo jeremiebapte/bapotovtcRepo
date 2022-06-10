@@ -9,99 +9,174 @@
     tools:context="com.bapoto.vtc.ui.ProfileActivity"
     tools:openDrawer="start">
 
-    <ImageView
-        android:id="@+id/profileImageView"
-        android:layout_width="111dp"
-        android:layout_height="95dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="99dp"
-        android:layout_marginEnd="152dp"
-        android:background="@drawable/ic_anon_user_48dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+
+    <View
+        android:id="@+id/headerBackground"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/primary"
+        app:layout_constraintBottom_toTopOf="@id/viewSupporter"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck"
-        android:contentDescription="@string/imageprofile" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="60dp" />
 
-    <Button
-        android:id="@+id/allResaBtn"
-        android:layout_width="390dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="124dp"
-        android:gravity="center"
-        android:text="@string/mes_reservations"
-        android:textColor="#795548"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/usernameEditText"
-        android:layout_width="278dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="251dp"
-        android:layout_marginEnd="59dp"
-        android:gravity="center"
-        android:text="@string/text_input_username"
-        android:textColor="@color/black"
-        android:textSize="@dimen/default_text_size"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints=""
-        android:inputType="textPersonName" />
-
-    <TextView
-        android:id="@+id/emailTextView"
-        android:layout_width="278dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="74dp"
-        android:layout_marginTop="296dp"
-        android:layout_marginEnd="59dp"
-        android:gravity="center"
-        android:textSize="@dimen/default_text_size"
-        app:layout_constraintEnd_toEndOf="parent"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageBack"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_back"
+        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/chatButton"
-        android:layout_width="390dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="215dp"
-        android:gravity="center"
-        android:text="@string/demande_d_informations"
-        android:textColor="#795548"
-        android:textSize="11sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageSignOut"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_16sdp"
+        android:layout_marginRight="@dimen/_16sdp"
+        android:padding="@dimen/_4sdp"
+        android:src="@drawable/ic_logout"
+        android:tint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <android.widget.Button
-        android:id="@+id/signOutButton"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="263dp"
-        android:layout_height="48dp"
-        android:layout_margin="@dimen/default_large_margin"
-        android:layout_marginStart="139dp"
-        android:layout_marginEnd="74dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/gradient_button"
+
+    <TextView
+        android:id="@+id/textName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:ellipsize="end"
+        android:fontFamily="@font/ubuntu_regular"
         android:gravity="center"
-        android:text="@string/button_sign_out_account"
+        android:maxLines="1"
         android:textColor="@color/black"
-        android:textSize="@dimen/profile_text_size"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintBottom_toBottomOf="@id/imageBack"
+        app:layout_constraintEnd_toStartOf="@id/imageSignOut"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/imageBack"
+        app:layout_constraintTop_toTopOf="@id/imageBack"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvMailAdress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/ubuntu_regular"
+        android:text="Arya"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintBottom_toBottomOf="@+id/headerBackground"
+        app:layout_constraintEnd_toStartOf="@+id/imageSignOut"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toEndOf="@+id/imageBack" />
+
+
+    <View
+        android:id="@+id/viewSupporter"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:background="@color/primary"
+        app:layout_constraintTop_toBottomOf="@id/imageBack" />
+
+
+    <TextView
+        android:id="@+id/tvPastReservations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/ubuntu_regular"
+        android:text="Conversation récentes"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatRecyclerViw"
+        android:layout_width="405dp"
+        android:layout_height="147dp"
+        android:layout_marginTop="@dimen/_150sdp"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_12sdp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/reservationToComeRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
+
+    <TextView
+        android:id="@+id/tvMyReservations"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/ubuntu_regular"
+        android:text="Mes Réservations"
+        android:textColor="@color/secondary_text"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chatRecyclerViw" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reservationToComeRecyclerView"
+        android:layout_width="411dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="@dimen/_32sdp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chatRecyclerViw" />
+
+
+    <ImageView
+        android:id="@+id/chatButton"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/background_add_button"
+        android:contentDescription="@string/app_name"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/ic_chat"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/reservationToComeRecyclerView"
+        app:layout_constraintVertical_bias="0.0"
+        app:tint="@color/primary" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageProfile"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/background_image"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewSupporter"
+        app:riv_oval="true" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

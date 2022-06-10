@@ -172,7 +172,7 @@
         android:layout_marginStart="@dimen/default_margin_start"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="@dimen/default_margin_end"
-        android:fontFamily="@font/bungee"
+        android:fontFamily="@font/ubuntu_bold"
         android:text="@string/mon_deviss"
         android:textAlignment="center"
         android:textColor="@color/black"

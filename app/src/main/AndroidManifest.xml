@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.bapoto.bapoto">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,6 +16,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bapotovtc">
+        <activity
+            android:name="com.bapoto.vtc.adapters.RecentConversationsAdapter"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.PassWordAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.SignUpAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.SignUpActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.bapoto.vtc.ui.SignInActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name="com.bapoto.vtc.ui.SuccessReservationActivity"
             android:exported="false" />
@@ -31,14 +58,15 @@
             android:parentActivityName="com.bapoto.vtc.ui.ReservationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.bapoto.vtc.ui.RecapActivity"
+            android:name="com.bapoto.vtc.ui.SummaryActivity"
             android:parentActivityName="com.bapoto.vtc.ui.ReservationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Bapotovtc.NoActionBar" />
         <activity
             android:name="com.bapoto.vtc.ui.ChatActivity"
             android:parentActivityName="com.bapoto.vtc.ui.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name="com.bapoto.vtc.ui.ReservationActivity"
             android:label="@string/toolbar_title_reservation_activity"
@@ -54,16 +82,10 @@
             android:name="com.bapoto.vtc.ui.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.Bapotovtc.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.Bapotovtc.NoActionBar" />
 
         <service
-            android:name="com.bapoto.vtc.notification.NotificationsService"
+            android:name="com.bapoto.vtc.firebase.MessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

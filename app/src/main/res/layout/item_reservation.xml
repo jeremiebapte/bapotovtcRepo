@@ -5,9 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardElevation="8dp"
     app:cardCornerRadius="8dp"
-    android:layout_margin="16dp">
-
-
+    android:layout_margin="20dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -15,8 +13,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginVertical="6dp"
         android:orientation="vertical">
-
-
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -29,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="Prise en charge :"
                 android:textColor="@color/black"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="bold"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -38,11 +34,7 @@
                 android:layout_marginStart="8dp"
                 android:text="Arya"
                 android:textColor="@color/black"
-                android:textSize="18dp"/>
-
-
-
-
+                android:textSize="18sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -56,8 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="Destination :"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -67,12 +58,7 @@
                 android:layout_marginStart="8dp"
                 android:text="Stark"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                />
-
-
-
-
+                android:textSize="18sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -86,9 +72,9 @@
                 android:layout_height="wrap_content"
                 android:text="Date:"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-
+                android:textSize="18sp"
                 android:textStyle="bold"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,11 +82,7 @@
                 android:layout_marginStart="8dp"
                 android:text="18/10"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                />
-
-
-
+                android:textSize="18sp"/>
 
         </LinearLayout>
         <LinearLayout
@@ -114,9 +96,9 @@
                 android:layout_height="wrap_content"
                 android:text="Heure:"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-
+                android:textSize="18sp"
                 android:textStyle="bold"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,17 +106,8 @@
                 android:layout_marginStart="8dp"
                 android:text="14H"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                />
-
-
-
-
+                android:textSize="18sp"/>
         </LinearLayout>
-
-
-
-
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
