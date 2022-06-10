@@ -18,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,7 +49,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class ProfileActivity extends BaseActivity<ActivityProfileBinding> {
+public class ProfileActivity extends AppCompatActivity {
+
+    private ActivityProfileBinding binding;
     final Context context = this;
     private PreferenceManager preferenceManager;
     private List<ChatMessage> conversations;
@@ -56,14 +59,13 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding> {
     private FirebaseFirestore db;
     private ReservationAdapter adapter;
 
-    @Override
-    protected ActivityProfileBinding getViewBinding() {
-        return ActivityProfileBinding.inflate(getLayoutInflater());
-    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityProfileBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         preferenceManager = new PreferenceManager(this);
         init();
         setupListeners();
@@ -126,9 +128,10 @@ public class ProfileActivity extends BaseActivity<ActivityProfileBinding> {
 
         adapter = new ReservationAdapter(options);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = binding.reservationToComeRecyclerView;
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
     }
 

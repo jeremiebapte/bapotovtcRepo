@@ -10,12 +10,11 @@ import android.util.Base64;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
-
+import com.bapoto.bapoto.databinding.ActivitySignUpBinding;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bapoto.bapoto.databinding.ActivitySignUpBinding;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -58,7 +57,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-
     }
 
     private void signUp() {

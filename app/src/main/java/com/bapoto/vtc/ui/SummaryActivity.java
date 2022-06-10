@@ -33,6 +33,7 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setTextViews();
         setListeners();
+        preferenceManager = new PreferenceManager(this);
     }
 
     private void setListeners() {
@@ -98,7 +99,7 @@ public class SummaryActivity extends AppCompatActivity {
                     " votre téléphone", Toast.LENGTH_SHORT).show();
         }
 
-        storeReservationInFirestore();
+        createReservation();
     }
 
     private void animationAndGoBackToMain() {
@@ -106,9 +107,12 @@ public class SummaryActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
 
     // Create a new reservation
-    private void storeReservationInFirestore() {
+    private void createReservation() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> reservation = new HashMap<>();
         reservation.put(Constants.KEY_NAME,binding.containerName.getText().toString());
@@ -120,7 +124,13 @@ public class SummaryActivity extends AppCompatActivity {
         reservation.put(Constants.KEY_INFOS,binding.containerInfos.getText().toString());
         reservation.put(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.KEY_USER_ID));
         db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
-                .add(reservation);
+                .add(reservation)
+                .addOnSuccessListener(documentReference -> {
+                    preferenceManager.putString(Constants.KEY_SENDER_ID, documentReference.getId());
+                })
+                .addOnFailureListener(e -> {
+                    showToast(e.getMessage());
+                });
     }
 
     // Pop up for explain the send mail reservation
