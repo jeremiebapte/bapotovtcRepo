@@ -1,36 +1,46 @@
 package com.bapoto.vtc.ui;
 
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewbinding.ViewBinding;
+
+import com.bapoto.vtc.utilities.Constants;
+import com.bapoto.vtc.utilities.PreferenceManager;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
-/**
- * Base Activity class that allow to manage all the common code for the activities
- * @param <T> Should be the type of the viewBinding of your activity see more <a href="https://developer.android.com/topic/libraries/view-binding"> here </a>
- */
+public  class BaseActivity extends AppCompatActivity {
 
-public abstract class BaseActivity<T extends ViewBinding> extends AppCompatActivity {
-
-    protected abstract T getViewBinding();
-    protected T binding;
+    private DocumentReference documentReference ,docref;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initBinding();
+        PreferenceManager preferenceManager = new PreferenceManager(getApplicationContext());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        docref = db.collection(Constants.KEY_COLLECTION_USERS)
+                .document(preferenceManager.getString(Constants.KEY_USER_ID));
+
+        documentReference = db.collection(Constants.KEY_COLLECTION_ADMIN)
+                .document(preferenceManager.getString(Constants.KEY_USER_ID));
     }
 
-    /**
-     * Initialise the binding object and the layout of the activity
-     */
-    private void initBinding(){
-        binding = getViewBinding();
-        View view = binding.getRoot();
-        setContentView(view);
+    @Override
+    protected void onPause() {
+        super.onPause();
+        documentReference.update(Constants.KEY_AVAILABILITY,0);
+        docref.update(Constants.KEY_AVAILABILITY,0);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        documentReference.update(Constants.KEY_AVAILABILITY,1);
+        docref.update(Constants.KEY_AVAILABILITY,1);
+    }
+
+
 
 }

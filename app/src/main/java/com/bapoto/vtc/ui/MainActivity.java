@@ -21,34 +21,32 @@ import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 
-
-public class MainActivity extends BaseActivity<ActivityMainBinding> implements LocationListener {
+public class MainActivity extends BaseActivity implements LocationListener {
     private LocationManager lm;
     private static final int RC_SIGN_IN = 123;
     private static final int PERMS_CALL = 7;
     private PreferenceManager preferenceManager;
-
+    private ActivityMainBinding binding;
     private MapFragment mapFragment;
     private GoogleMap googleMap;
 
-    @Override
-    protected ActivityMainBinding getViewBinding() {
-        return ActivityMainBinding.inflate(getLayoutInflater());
-    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         setupListeners();
         getToken();
         preferenceManager = new PreferenceManager(this);
+
         FragmentManager fragmentManager = getFragmentManager();
         mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
     }
@@ -101,11 +99,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements L
                         .document(preferenceManager.getString(Constants.KEY_USER_ID)
                         );
         documentReference.update(Constants.KEY_FCM_TOKEN,token)
-                .addOnFailureListener( e -> showToast("Echec mis à jour du token"));
+                .addOnFailureListener( e -> showToast());
     }
 
-    private void showToast(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    private void showToast(){
+        Toast.makeText(this, "Echec mis à jour du token", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -179,15 +177,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> implements L
     }
     @SuppressWarnings("MissingPermission")
     private void loadMap() {
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull GoogleMap googleMap) {
-                MainActivity.this.googleMap = googleMap;
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
-                googleMap.setMyLocationEnabled(true);
+        mapFragment.getMapAsync(googleMap -> {
+            MainActivity.this.googleMap = googleMap;
+            googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+            googleMap.setMyLocationEnabled(true);
 
 
-            }
         });
     }
 }

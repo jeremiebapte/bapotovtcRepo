@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,8 +28,11 @@ import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityProfileBinding;
 import com.bapoto.vtc.adapters.RecentConversationsAdapter;
 import com.bapoto.vtc.adapters.ReservationAdapter;
+import com.bapoto.vtc.listeners.ConversionListener;
+import com.bapoto.vtc.model.Admin;
 import com.bapoto.vtc.model.ChatMessage;
 import com.bapoto.vtc.model.Reservation;
+import com.bapoto.vtc.model.User;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -49,7 +54,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements ConversionListener {
 
     private ActivityProfileBinding binding;
     final Context context = this;
@@ -87,7 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void init() {
         conversations = new ArrayList<>();
-        conversationsAdapter = new RecentConversationsAdapter(conversations);
+        conversationsAdapter = new RecentConversationsAdapter(conversations,this);
         binding.chatRecyclerViw.setAdapter(conversationsAdapter);
         db = FirebaseFirestore.getInstance();
         setupRecyclerView();
@@ -281,6 +286,15 @@ public class ProfileActivity extends AppCompatActivity {
                     finish();
                 })
                 .addOnFailureListener(e -> showToast("Déconnexion impossible"));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onConversionClicked(Admin admin) {
+        Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+        intent.putExtra(Constants.KEY_USER,admin);
+        startActivity(intent);
+
     }
 }
 

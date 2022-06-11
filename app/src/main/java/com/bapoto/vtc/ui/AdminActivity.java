@@ -1,10 +1,11 @@
 package com.bapoto.vtc.ui;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
 
 import com.bapoto.bapoto.databinding.ActivityAdminBinding;
 import com.bapoto.vtc.adapters.AdminAdapter;
@@ -18,7 +19,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminActivity extends AppCompatActivity implements AdminListener {
+public class AdminActivity extends BaseActivity implements AdminListener {
 
     private ActivityAdminBinding binding;
     private PreferenceManager preferenceManager;
@@ -85,6 +86,7 @@ public class AdminActivity extends AppCompatActivity implements AdminListener {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClickedAdmin(Admin admin) {
         Intent intent = new Intent(this,ChatActivity.class);

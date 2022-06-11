@@ -10,18 +10,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapoto.databinding.ItemContainerRecentConversationBinding;
+import com.bapoto.vtc.listeners.ConversionListener;
+import com.bapoto.vtc.model.Admin;
 import com.bapoto.vtc.model.ChatMessage;
+import com.bapoto.vtc.model.User;
 
 import java.util.List;
 
 public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConversationsAdapter.ConversionViewHolder> {
 
-
     private final List<ChatMessage> chatMessages;
-    //private final ConversionListener conversionListener;
+    private final ConversionListener conversionListener;
 
-    public RecentConversationsAdapter(List<ChatMessage> chatMessages) {
+    public RecentConversationsAdapter(List<ChatMessage> chatMessages, ConversionListener conversionListener) {
         this.chatMessages = chatMessages;
+        this.conversionListener = conversionListener;
     }
 
     @NonNull
@@ -46,7 +49,7 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
     }
 
 
-    static class ConversionViewHolder extends RecyclerView.ViewHolder {
+    class ConversionViewHolder extends RecyclerView.ViewHolder {
 
         ItemContainerRecentConversationBinding binding;
 
@@ -59,8 +62,15 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
             binding.imageProfile.setImageBitmap(getConversionImage(chatMessage.conversionImage));
             binding.textName.setText(chatMessage.conversionName);
             binding.textRecentMessage.setText(chatMessage.message);
-
+            binding.getRoot().setOnClickListener(view -> {
+                Admin admin = new Admin();
+                admin.id = chatMessage.conversionId;
+                admin.name = chatMessage.conversionName;
+                admin.image = chatMessage.conversionImage;
+                conversionListener.onConversionClicked(admin);
+            });
         }
+    }
 
         private Bitmap getConversionImage(String encodedImage) {
             byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
@@ -68,4 +78,3 @@ public class RecentConversationsAdapter extends RecyclerView.Adapter<RecentConve
 
         }
     }
-}

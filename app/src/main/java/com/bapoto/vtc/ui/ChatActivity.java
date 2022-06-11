@@ -9,7 +9,6 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.bapoto.bapoto.databinding.ActivityChatBinding;
 import com.bapoto.vtc.adapters.ChatAdapter;
@@ -33,9 +32,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends BaseActivity {
     private ActivityChatBinding binding;
     private Admin receiverAdmin;
     private List<ChatMessage> chatMessages;
@@ -43,6 +43,7 @@ public class ChatActivity extends AppCompatActivity {
     private PreferenceManager preferenceManager;
     private FirebaseFirestore db;
     private String conversionId = null;
+    private Boolean isReceiverAvailable = false;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +54,12 @@ public class ChatActivity extends AppCompatActivity {
         setListeners();
         init();
         listenMessage();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listenAvailabilityOfReceiver();
     }
 
     private void init() {
@@ -90,6 +97,29 @@ public class ChatActivity extends AppCompatActivity {
         addConversion(conversion);
     }
         binding.inputMessage.setText(null);
+    }
+
+    private void listenAvailabilityOfReceiver() {
+        db.collection(Constants.KEY_COLLECTION_USERS).document(
+                receiverAdmin.id
+        ).addSnapshotListener(ChatActivity.this, (value, error) -> {
+            if (error != null) {
+                return;
+            }
+            if (value != null) {
+                if (value.getLong(Constants.KEY_AVAILABILITY) != null) {
+                    int availability = Objects.requireNonNull(
+                            value.getLong(Constants.KEY_AVAILABILITY)
+                    ).intValue();
+                    isReceiverAvailable = availability == 1;
+                }
+            }
+            if (isReceiverAvailable) {
+                binding.textAvailability.setVisibility(View.VISIBLE);
+            }else {
+                binding.textAvailability.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void listenMessage() {
