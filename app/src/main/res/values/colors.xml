@@ -11,6 +11,7 @@
 
         <color name="primary">#FFD700</color>
         <color name="primary_dark">#A1913D</color>
+        <color name="primary_reservation">#292929</color>
         <color name="colorAccent">#FFA000</color>
         <color name="colorError">#FF5252</color>
 
@@ -22,13 +23,16 @@
         <color name="green">#6BB18C</color>
         <color name="colorSandLight">#ECDAAF</color>
         <color name="colorSand">#EBCB94</color>
-    <color name="brown">#795548</color>
+        <color name="brown">#795548</color>
 
-    <array name="colorPagesViewPager">
-    <item>#ECDAAF</item>
-    <item>#EBCB94</item>
 
-</array>
+        <color name="colorSearchBackground">#333333</color>
+        <color name="colorTextHint">#7B7B7B</color>
+        <color name="colorQuickActionBackGround">#2F2D2E</color>
+        <color name="colorIcons">#A4A4A4</color>
+
+
+
 
 
 </resources>

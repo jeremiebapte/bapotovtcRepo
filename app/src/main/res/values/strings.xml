@@ -97,7 +97,8 @@
     <string name="name">Nom/Prénom</string>
     <string name="conrfirm_password">Confirmer Mot de Passe</string>
     <string name="sign_up">Créer un compte</string>
-    <string name="select_user">Selectionner un chauffeur</string>
+    <string name="select_driver">Selectionner un chauffeur</string>
+    <string name="select_user">Selectionner un passager</string>
     <string name="create_admin_account">Créer compte Admin</string>
     <string name="ok">OK</string>
     <string name="administrateur_bapoto">Administrateur BAPOTO</string>

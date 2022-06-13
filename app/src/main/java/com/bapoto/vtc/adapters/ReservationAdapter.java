@@ -22,8 +22,9 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
 
     @Override
     protected void onBindViewHolder(@NonNull ReservationHolder holder, int position, @NonNull Reservation model) {
+        holder.tvName.setText(model.getName());
         holder.tvPickUP.setText(model.getPickUp());
-        holder.tvDestination.setText(model.getDestination());
+        holder.tvDestination.setText(model.getDropOff());
         holder.tvHour.setText(model.getHour());
         holder.tvDate.setText(model.getDate());
     }
@@ -36,18 +37,24 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
         return new ReservationHolder(v);
     }
 
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
+    }
+
+
     static class ReservationHolder extends RecyclerView.ViewHolder {
         TextView tvPickUP;
         TextView tvDestination;
         TextView tvDate;
         TextView tvHour;
+        TextView tvName;
 
 
         public ReservationHolder(@NonNull View itemView) {
             super(itemView);
-
+            tvName = itemView.findViewById(R.id.tvName);
             tvPickUP = itemView.findViewById(R.id.tvpickUp);
-            tvDestination = itemView.findViewById(R.id.tvDestination);
+            tvDestination = itemView.findViewById(R.id.tvDropOff);
             tvDate = itemView.findViewById(R.id.tvDate);
             tvHour = itemView.findViewById(R.id.tvHour);
         }

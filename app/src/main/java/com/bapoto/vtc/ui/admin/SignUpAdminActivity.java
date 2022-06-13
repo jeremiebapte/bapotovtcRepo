@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.admin;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -41,7 +41,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
     }
 
     private void setListeners() {
-        binding.textSignIn.setOnClickListener(view -> onBackPressed());
+        binding.textSignInAdmin.setOnClickListener(view -> onBackPressed());
         binding.buttonSignUp.setOnClickListener(view -> {
             if (isValidSignedUpDetails()) {
                 signUp();
@@ -73,11 +73,12 @@ public class SignUpAdminActivity extends AppCompatActivity {
                 .addOnSuccessListener(documentReference -> {
                     loading(false);
                     preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
+                    preferenceManager.putBoolean(Constants.KEY_IS_ADMIN,true);
                     preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
                     preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
                     preferenceManager.putString(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
                     preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);
-                    Intent intent = new Intent(this,MainActivity.class);
+                    Intent intent = new Intent(this, MainAdminActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                 })

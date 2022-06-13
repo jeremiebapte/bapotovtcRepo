@@ -9,7 +9,7 @@ public class Reservation {
      @Nullable
      private String email;
      private String pickUp;
-     private String destination;
+     private String dropOff;
      private String hour;
      private String date;
      @Nullable
@@ -20,13 +20,13 @@ public class Reservation {
     }
 
 
-    public Reservation(String name, String telephone, @Nullable String email, String pickUp, String destination,
+    public Reservation(String name, String telephone, @Nullable String email, String pickUp, String dropOff,
                        String hour, String date, @Nullable String infos) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
         this.pickUp = pickUp;
-        this.destination = destination;
+        this.dropOff = dropOff;
         this.hour = hour;
         this.date = date;
         this.infos = infos;
@@ -76,12 +76,12 @@ public class Reservation {
         this.pickUp = pickUp;
     }
 
-    public String getDestination() {
-        return destination;
+    public String getDropOff() {
+        return dropOff;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
+    public void setDropOff(String dropOff) {
+        this.dropOff = dropOff;
     }
 
     public String getHour() {

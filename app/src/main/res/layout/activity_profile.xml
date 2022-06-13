@@ -28,7 +28,7 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:padding="@dimen/_5sdp"
         android:src="@drawable/ic_back"
-        android:tint="@color/white"
+        android:tint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +41,7 @@
         android:layout_marginRight="@dimen/_16sdp"
         android:padding="@dimen/_4sdp"
         android:src="@drawable/ic_logout"
-        android:tint="@color/white"
+        android:tint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,7 +69,7 @@
         android:id="@+id/tvMailAdress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="@dimen/_7sdp"
         android:fontFamily="@font/ubuntu_regular"
         android:text="Arya"
         android:textColor="@color/secondary_text"
@@ -93,20 +93,20 @@
         android:id="@+id/tvPastReservations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:fontFamily="@font/ubuntu_regular"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:fontFamily="@font/ubuntu_bold"
         android:text="Conversation récentes"
         android:textColor="@color/secondary_text"
         android:textSize="@dimen/_9ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintHorizontal_bias="0.931"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatRecyclerViw"
         android:layout_width="405dp"
-        android:layout_height="147dp"
+        android:layout_height="82dp"
         android:layout_marginTop="@dimen/_130sdp"
         android:clipToPadding="false"
         android:orientation="vertical"
@@ -117,6 +117,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@id/reservationToComeRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
 
@@ -125,19 +126,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:fontFamily="@font/ubuntu_regular"
+        android:fontFamily="@font/ubuntu_bold"
         android:text="Mes Réservations"
         android:textColor="@color/secondary_text"
         android:textSize="@dimen/_9ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintHorizontal_bias="0.936"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chatRecyclerViw" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reservationToComeRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_130sdp"
+        android:layout_width="@dimen/_312sdp"
+        android:layout_height="@dimen/_220sdp"
         android:layout_marginTop="@dimen/_32sdp"
         android:clipToPadding="false"
         android:orientation="horizontal"
@@ -151,10 +152,11 @@
 
     <ImageView
         android:id="@+id/chatButton"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginEnd="32dp"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:background="@drawable/background_add_button"
         android:contentDescription="@string/app_name"
         android:padding="@dimen/_5sdp"
@@ -162,14 +164,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/reservationToComeRecyclerView"
-        app:layout_constraintVertical_bias="0.436"
+        app:layout_constraintVertical_bias="0.18"
         app:tint="@color/primary" />
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageProfile"
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_80sdp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:background="@drawable/background_image"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"

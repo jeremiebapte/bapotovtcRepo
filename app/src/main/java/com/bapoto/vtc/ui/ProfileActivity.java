@@ -32,7 +32,7 @@ import com.bapoto.vtc.listeners.ConversionListener;
 import com.bapoto.vtc.model.Admin;
 import com.bapoto.vtc.model.ChatMessage;
 import com.bapoto.vtc.model.Reservation;
-import com.bapoto.vtc.model.User;
+import com.bapoto.vtc.ui.admin.AdminActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -105,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
         byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         binding.imageProfile.setImageBitmap(bitmap);
-        binding.chatButton.setOnClickListener(view -> startActivity(new Intent(this,AdminActivity.class)));
+        binding.chatButton.setOnClickListener(view -> startActivity(new Intent(this, AdminActivity.class)));
     }
 
     private void setupListeners() {
@@ -272,20 +272,37 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
     private void signOut() {
         showToast("Déconnexion...");
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        DocumentReference documentReference =
-                database.collection(Constants.KEY_COLLECTION_USERS)
-                        .document(preferenceManager.getString(Constants.KEY_USER_ID)
-                        );
+        if (preferenceManager.getBoolean(Constants.KEY_IS_ADMIN)) {
+            DocumentReference documentReference =
+                    database.collection(Constants.KEY_COLLECTION_ADMIN)
+                    .document(preferenceManager.getString(Constants.KEY_USER_ID)
+                    );
+            HashMap<String, Object> updates = new HashMap<>();
+            updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
+            documentReference.update(updates)
+                    .addOnSuccessListener(unused -> {
+                        preferenceManager.clear();
+                        startActivity(new Intent(this, SignInActivity.class));
+                        finish();
+                    })
+                    .addOnFailureListener(e -> showToast("Déconnexion impossible"));
+        } else {
+            DocumentReference documentReference =
+                    database.collection(Constants.KEY_COLLECTION_USERS)
+                            .document(preferenceManager.getString(Constants.KEY_USER_ID)
+                            );
 
-        HashMap<String, Object> updates = new HashMap<>();
-        updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
-        documentReference.update(updates)
-                .addOnSuccessListener(unused -> {
-                    preferenceManager.clear();
-                    startActivity(new Intent(this, SignInActivity.class));
-                    finish();
-                })
-                .addOnFailureListener(e -> showToast("Déconnexion impossible"));
+
+            HashMap<String, Object> updates = new HashMap<>();
+            updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
+            documentReference.update(updates)
+                    .addOnSuccessListener(unused -> {
+                        preferenceManager.clear();
+                        startActivity(new Intent(this, SignInActivity.class));
+                        finish();
+                    })
+                    .addOnFailureListener(e -> showToast("Déconnexion impossible"));
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

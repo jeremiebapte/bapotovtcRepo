@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,14 +8,16 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivitySignInBinding;
-import com.bapoto.vtc.ui.admin.MainAdminActivity;
+import com.bapoto.vtc.ui.MainActivity;
+import com.bapoto.vtc.ui.SignUpActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class SignInActivity extends AppCompatActivity {
+public class SignInAdminActivity extends AppCompatActivity {
 
     private ActivitySignInBinding binding;
     private PreferenceManager preferenceManager;
@@ -25,11 +27,7 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         preferenceManager = new PreferenceManager(this);
-        if (preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN)) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
-        }
+
         if (preferenceManager.getBoolean(Constants.KEY_IS_ADMIN)) {
             Intent intent = new Intent(this, MainAdminActivity.class);
             startActivity(intent);
@@ -41,42 +39,12 @@ public class SignInActivity extends AppCompatActivity {
 
 
     private  void setListeners() {
-        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this,SignUpActivity.class)));
+        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this, SignUpActivity.class)));
         binding.buttonSignIn.setOnClickListener(view -> {
             if (isValidSignInDetails()) {
-                signIn();
-            } else if (preferenceManager.getBoolean(Constants.KEY_IS_ADMIN)) {
-                if (isValidSignInDetails()) {
-                    signInAdmin();
-                }
+                signInAdmin();
             }
         });
-    }
-
-    private void signIn(){
-        loading(true);
-        FirebaseFirestore database = FirebaseFirestore.getInstance();
-        database.collection(Constants.KEY_COLLECTION_USERS)
-                .whereEqualTo(Constants.KEY_EMAIL,binding.inputEmail.getText().toString())
-                .whereEqualTo(Constants.KEY_PASSWORD,binding.inputPassword.getText().toString())
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful() && task.getResult() != null
-                            && task.getResult().getDocuments().size() > 0) {
-                        DocumentSnapshot documentSnapshot = task.getResult().getDocuments().get(0);
-                        preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
-                        preferenceManager.putString(Constants.KEY_USER_ID,documentSnapshot.getId());
-                        preferenceManager.putString(Constants.KEY_NAME,documentSnapshot.getString(Constants.KEY_NAME));
-                        preferenceManager.putString(Constants.KEY_IMAGE,documentSnapshot.getString(Constants.KEY_IMAGE));
-                        Intent intent = new Intent(this, MainActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-                    }else {
-                        loading(false);
-                        showToast("Enregistrement Impossible");
-                    }
-                });
-
     }
 
     private void signInAdmin(){
@@ -133,6 +101,5 @@ public class SignInActivity extends AppCompatActivity {
             return true;
         }
     }
-
 
 }

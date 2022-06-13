@@ -1,5 +1,7 @@
 package com.bapoto.vtc.utilities;
 
+import java.util.HashMap;
+
 public class Constants {
 
     public static final String KEY_COLLECTION_USERS = "users";
@@ -16,6 +18,7 @@ public class Constants {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_PREFERENCE_NAME = "chatAppPreference";
     public static final String KEY_IS_SIGNED_IN = "isSignedIn";
+    public static final String KEY_IS_ADMIN = "isAdmin";
     public static final String KEY_RESERVATION_ID = "reservationId";
     public static final String KEY_USER_ID = "userId";
     public static final String KEY_IMAGE = "image";
@@ -38,4 +41,24 @@ public class Constants {
     public static final String REMOTE_MSG_DATA = "data";
     public static final String REMOTE_MSG_REGISTRATION = "registration_ids";
 
+
+    public static HashMap<String, String> remoteMsgHeaders = null;
+
+    public static HashMap<String, String> getRemoteMsgHeaders() {
+        if (remoteMsgHeaders == null) {
+            remoteMsgHeaders = new HashMap<>();
+            remoteMsgHeaders.put(
+                    REMOTE_MSG_AUTHORIZATION,
+                    "key=AAAAbtstbew:APA91bFYO-JEgRZNHCti1eQN-3Ug0_9aYC30mFqT3dlnuNhzewp0s95xtD3PRmjQy_xDPFBWuflXSt8i15_W4n-srhbbQ_c0XHHofRIsv1dkeNhXY2yMu2OWAzeTjdMTnqaZYex7KepP"
+            );
+            remoteMsgHeaders.put(
+                    REMOTE_MSG_CONTENT,
+                    "application/json"
+            );
+        }
+        return remoteMsgHeaders;
+    }
 }
+
+
+

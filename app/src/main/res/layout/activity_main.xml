@@ -34,7 +34,7 @@
 
 
         <android.widget.Button
-            android:id="@+id/loginButton"
+            android:id="@+id/profileButton"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="@dimen/_200sdp"
             android:layout_height="wrap_content"

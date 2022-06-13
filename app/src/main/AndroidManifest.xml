@@ -17,16 +17,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bapotovtc">
         <activity
+            android:name="com.bapoto.vtc.ui.admin.SignInAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.UsersActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.admin.ChatAdminActivity"
+            android:exported="false"
+            android:parentActivityName="com.bapoto.vtc.ui.admin.MainAdminActivity" />
+        <activity
+            android:name="com.bapoto.vtc.ui.admin.MainAdminActivity"
+            android:exported="false" />
+        <activity
             android:name="com.bapoto.vtc.adapters.RecentConversationsAdapter"
+            android:exported="false"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name="com.bapoto.vtc.ui.admin.PassWordAdminActivity"
             android:exported="false" />
         <activity
-            android:name="com.bapoto.vtc.ui.PassWordAdminActivity"
+            android:name="com.bapoto.vtc.ui.admin.SignUpAdminActivity"
             android:exported="false" />
         <activity
-            android:name="com.bapoto.vtc.ui.SignUpAdminActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.bapoto.vtc.ui.AdminActivity"
+            android:name="com.bapoto.vtc.ui.admin.AdminActivity"
             android:exported="false" />
         <activity
             android:name="com.bapoto.vtc.ui.SignUpActivity"
@@ -44,9 +58,6 @@
         </activity>
         <activity
             android:name="com.bapoto.vtc.ui.SuccessReservationActivity"
-            android:exported="false" />
-        <activity
-            android:name="com.bapoto.vtc.ui.AllReservation"
             android:exported="false" />
         <activity
             android:name="com.bapoto.vtc.ui.BonDeDevis"

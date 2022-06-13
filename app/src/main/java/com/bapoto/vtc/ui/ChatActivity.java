@@ -6,7 +6,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
@@ -14,6 +16,8 @@ import com.bapoto.bapoto.databinding.ActivityChatBinding;
 import com.bapoto.vtc.adapters.ChatAdapter;
 import com.bapoto.vtc.model.Admin;
 import com.bapoto.vtc.model.ChatMessage;
+import com.bapoto.vtc.network.ApiClient;
+import com.bapoto.vtc.network.ApiService;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +28,10 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +41,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class ChatActivity extends BaseActivity {
@@ -49,6 +61,7 @@ public class ChatActivity extends BaseActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityChatBinding.inflate(getLayoutInflater());
+
         setContentView(binding.getRoot());
         loadReceiverDetails();
         setListeners();
@@ -96,7 +109,66 @@ public class ChatActivity extends BaseActivity {
         conversion.put(Constants.KEY_TIMESTAMP,new Date());
         addConversion(conversion);
     }
+        if (!isReceiverAvailable) {
+            try {
+                JSONArray tokens = new JSONArray();
+                tokens.put(receiverAdmin.token);
+
+                JSONObject data = new JSONObject();
+                data.put(Constants.KEY_USER_ID,preferenceManager.getString(Constants.KEY_USER_ID));
+                data.put(Constants.KEY_NAME, preferenceManager.getString(Constants.KEY_NAME));
+                data.put(Constants.KEY_FCM_TOKEN,preferenceManager.getString(Constants.KEY_FCM_TOKEN));
+                data.put(Constants.KEY_MESSAGE,binding.inputMessage.getText().toString());
+
+                JSONObject body = new JSONObject();
+                body.put(Constants.REMOTE_MSG_DATA,data);
+                body.put(Constants.REMOTE_MSG_REGISTRATION,tokens);
+
+                sendNotification(body.toString());
+            } catch (Exception e) {
+                showToast(e.getMessage());
+            }
+        }
         binding.inputMessage.setText(null);
+    }
+
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void sendNotification(String messageBody) {
+        ApiClient.getClient().create(ApiService.class).sendMessage(
+                Constants.getRemoteMsgHeaders(),
+                messageBody
+        ).enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(@NonNull Call<String> call,@NonNull Response<String> response) {
+                if (response.isSuccessful()) {
+                        try {
+                            if (response.body() != null) {
+                                JSONObject responseJson = new JSONObject(response.body());
+                                JSONArray results = responseJson.getJSONArray("results");
+                                if (responseJson.getInt("failure") == 1) {
+                                    JSONObject error = (JSONObject)  results.get(0);
+                                    showToast(error.getString("error"));
+                                    return;
+                                }
+                            }
+                        }catch (JSONException e ) {
+                            e.printStackTrace();
+                        }
+                        showToast("Notification envoyée avec succès !!");
+                }else {
+                    showToast("error:"+ response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<String> call,@NonNull Throwable t) {
+            showToast(t.getMessage());
+            }
+        });
     }
 
     private void listenAvailabilityOfReceiver() {
@@ -113,6 +185,13 @@ public class ChatActivity extends BaseActivity {
                     ).intValue();
                     isReceiverAvailable = availability == 1;
                 }
+                receiverAdmin.token = value.getString(Constants.KEY_FCM_TOKEN);
+                if (receiverAdmin.image == null) {
+                    receiverAdmin.image = value.getString(Constants.KEY_IMAGE);
+                    chatAdapter.setReceiverProfileImage(getBitmapFromEncodedString(receiverAdmin.image));
+                    chatAdapter.notifyItemRangeInserted(0,chatMessages.size());
+                }
+
             }
             if (isReceiverAvailable) {
                 binding.textAvailability.setVisibility(View.VISIBLE);
@@ -167,8 +246,12 @@ public class ChatActivity extends BaseActivity {
     });
 
     private Bitmap getBitmapFromEncodedString (String encodedImage) {
-        byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+        if (encodedImage != null) {
+            byte[] bytes = Base64.decode(encodedImage,Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(bytes,0, bytes.length);
+        } else {
+            return null;
+        }
     }
 
 

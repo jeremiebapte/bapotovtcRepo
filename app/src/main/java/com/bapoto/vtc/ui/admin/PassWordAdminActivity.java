@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityPassWordAdminBinding;
+import com.bapoto.vtc.ui.admin.SignUpAdminActivity;
 
 public class PassWordAdminActivity extends AppCompatActivity {
     private ActivityPassWordAdminBinding binding;
@@ -25,7 +25,7 @@ public class PassWordAdminActivity extends AppCompatActivity {
     private void setListeners() {
         binding.buttonSignIn.setOnClickListener(view ->{
             if (isValidPassword()) {
-                startActivity(new Intent(getApplicationContext(),SignUpAdminActivity.class)); }
+                startActivity(new Intent(getApplicationContext(), SignInAdminActivity.class)); }
         });
 
     }
