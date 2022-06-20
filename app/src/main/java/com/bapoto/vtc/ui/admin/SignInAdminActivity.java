@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.bapoto.bapoto.R;
+import com.bapoto.bapoto.databinding.ActivitySignInAdminBinding;
 import com.bapoto.bapoto.databinding.ActivitySignInBinding;
 import com.bapoto.vtc.ui.MainActivity;
 import com.bapoto.vtc.ui.SignUpActivity;
@@ -19,13 +20,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SignInAdminActivity extends AppCompatActivity {
 
-    private ActivitySignInBinding binding;
+    private ActivitySignInAdminBinding binding;
     private PreferenceManager preferenceManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySignInBinding.inflate(getLayoutInflater());
+        binding = ActivitySignInAdminBinding.inflate(getLayoutInflater());
         preferenceManager = new PreferenceManager(this);
 
         if (preferenceManager.getBoolean(Constants.KEY_IS_ADMIN)) {
@@ -39,7 +40,7 @@ public class SignInAdminActivity extends AppCompatActivity {
 
 
     private  void setListeners() {
-        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this, SignUpActivity.class)));
+        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this, SignUpAdminActivity.class)));
         binding.buttonSignIn.setOnClickListener(view -> {
             if (isValidSignInDetails()) {
                 signInAdmin();

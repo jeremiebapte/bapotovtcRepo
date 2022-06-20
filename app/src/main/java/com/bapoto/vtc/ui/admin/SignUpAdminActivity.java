@@ -72,7 +72,6 @@ public class SignUpAdminActivity extends AppCompatActivity {
                 .add(admin)
                 .addOnSuccessListener(documentReference -> {
                     loading(false);
-                    preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true);
                     preferenceManager.putBoolean(Constants.KEY_IS_ADMIN,true);
                     preferenceManager.putString(Constants.KEY_USER_ID, documentReference.getId());
                     preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());

@@ -67,12 +67,9 @@ public class MainActivity extends BaseActivity implements LocationListener {
     }
 
     private void setupListeners(){
-        // Login/Profile Button
         binding.profileButton.setOnClickListener(view -> startProfileActivity());
-
-        // Reservation Button
         binding.reservationButton.setOnClickListener(view -> startReservationActivity());
-        //
+
     }
 
 
@@ -92,17 +89,6 @@ public class MainActivity extends BaseActivity implements LocationListener {
     }
 
     private void updateToken(String token) {
-        preferenceManager.putString(Constants.KEY_FCM_TOKEN,token);
-        if (preferenceManager.getBoolean(Constants.KEY_IS_ADMIN)) {
-            FirebaseFirestore database = FirebaseFirestore.getInstance();
-            DocumentReference documentReference =
-                    database.collection(Constants.KEY_COLLECTION_ADMIN)
-                            .document(preferenceManager.getString(Constants.KEY_USER_ID)
-                            );
-            documentReference.update(Constants.KEY_FCM_TOKEN, token)
-                    .addOnFailureListener(e -> showToast());
-        } else {
-
             preferenceManager.putString(Constants.KEY_FCM_TOKEN, token);
             FirebaseFirestore database = FirebaseFirestore.getInstance();
             DocumentReference documentReference =
@@ -112,10 +98,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
             documentReference.update(Constants.KEY_FCM_TOKEN, token)
                     .addOnFailureListener(e -> showToast());
         }
-    }
 
-
-    private void showToast(){
+        private void showToast(){
         Toast.makeText(this, "Echec mis à jour du token", Toast.LENGTH_SHORT).show();
     }
 

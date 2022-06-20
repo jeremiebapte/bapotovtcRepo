@@ -1,7 +1,7 @@
 package com.bapoto.vtc.ui;
 
 
-import android.content.Context;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -57,14 +57,11 @@ import java.util.List;
 public class ProfileActivity extends AppCompatActivity implements ConversionListener {
 
     private ActivityProfileBinding binding;
-    final Context context = this;
     private PreferenceManager preferenceManager;
     private List<ChatMessage> conversations;
     private RecentConversationsAdapter conversationsAdapter;
     private FirebaseFirestore db;
     private ReservationAdapter adapter;
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -109,17 +106,13 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
     }
 
     private void setupListeners() {
-        // Sign out button
         binding.imageSignOut.setOnClickListener(view -> alertSignOut());
-
         binding.imageBack.setOnClickListener(view -> onBackPressed());
         binding.imageProfile.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             pickImage.launch(intent);
         });
-
-
     }
 
     private void setupRecyclerView() {
@@ -133,11 +126,15 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
 
         adapter = new ReservationAdapter(options);
 
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         RecyclerView recyclerView = binding.reservationToComeRecyclerView;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+
+
     }
 
     private void listenConversation() {
@@ -149,6 +146,7 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
                 .addSnapshotListener(eventListener);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
         if (error != null) {
             return;
@@ -185,17 +183,26 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
                     }
                 }
             }
-            Collections.sort(conversations,(obj1, obj2) -> obj2.dateObject.compareTo(obj1.dateObject));
-            conversationsAdapter.notifyDataSetChanged();
-            binding.chatRecyclerViw.smoothScrollToPosition(0);
-            binding.chatRecyclerViw.setVisibility(View.VISIBLE);
-
+            if (conversations.size() > 0) {
+                Collections.sort(conversations,(obj1, obj2) -> obj2.dateObject.compareTo(obj1.dateObject));
+                conversationsAdapter.notifyDataSetChanged();
+                binding.chatRecyclerViw.smoothScrollToPosition(0);
+                binding.chatRecyclerViw.setVisibility(View.VISIBLE);
+            } else {
+                showErrorMessage();
+            }
         }
     };
 
-    //PopUp for confirm the signout
+    private void showErrorMessage() {
+
+        binding.textNoChatMessage.setText(String.format("%s","Aucune discussion pour le moment..."));
+        binding.textNoChatMessage.setVisibility(View.VISIBLE);
+    }
+
+    //PopUp for confirm the sign out
     public void alertSignOut() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
         // set title
         alertDialogBuilder.setTitle("DÉCONNEXION");
@@ -272,27 +279,10 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
     private void signOut() {
         showToast("Déconnexion...");
         FirebaseFirestore database = FirebaseFirestore.getInstance();
-        if (preferenceManager.getBoolean(Constants.KEY_IS_ADMIN)) {
-            DocumentReference documentReference =
-                    database.collection(Constants.KEY_COLLECTION_ADMIN)
-                    .document(preferenceManager.getString(Constants.KEY_USER_ID)
-                    );
-            HashMap<String, Object> updates = new HashMap<>();
-            updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
-            documentReference.update(updates)
-                    .addOnSuccessListener(unused -> {
-                        preferenceManager.clear();
-                        startActivity(new Intent(this, SignInActivity.class));
-                        finish();
-                    })
-                    .addOnFailureListener(e -> showToast("Déconnexion impossible"));
-        } else {
-            DocumentReference documentReference =
+        DocumentReference documentReference =
                     database.collection(Constants.KEY_COLLECTION_USERS)
                             .document(preferenceManager.getString(Constants.KEY_USER_ID)
                             );
-
-
             HashMap<String, Object> updates = new HashMap<>();
             updates.put(Constants.KEY_FCM_TOKEN, FieldValue.delete());
             documentReference.update(updates)
@@ -303,7 +293,7 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
                     })
                     .addOnFailureListener(e -> showToast("Déconnexion impossible"));
         }
-    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override

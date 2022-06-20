@@ -97,14 +97,15 @@
                 android:visibility="invisible"/>
 
         </FrameLayout>
-
-
-
-
-
-
-
-
+        <TextView
+            android:id="@+id/textCreateNewAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="@string/new_admin"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

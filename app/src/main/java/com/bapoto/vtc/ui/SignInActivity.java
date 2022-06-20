@@ -30,11 +30,7 @@ public class SignInActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        if (preferenceManager.getBoolean(Constants.KEY_IS_ADMIN)) {
-            Intent intent = new Intent(this, MainAdminActivity.class);
-            startActivity(intent);
-            finish();
-        }
+
         setContentView(binding.getRoot());
         setListeners();
     }

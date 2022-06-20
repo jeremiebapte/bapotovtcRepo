@@ -1,45 +1,52 @@
 package com.bapoto.vtc.ui;
 
+import static com.bapoto.vtc.utilities.Constants.KEY_PHONE;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityReservationBinding;
-import com.google.firebase.auth.FirebaseUser;
+import com.bapoto.vtc.utilities.Constants;
+import com.bapoto.vtc.utilities.PreferenceManager;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
 
 public class ReservationActivity extends AppCompatActivity {
-
     private ActivityReservationBinding binding;
+    private PreferenceManager preferenceManager;
     private DatePickerDialog datePickerDialog;
-    private Button dateButton;
     Button timeButton;
     private int hour, minute;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityReservationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        preferenceManager = new PreferenceManager(this);
         initDatepicker();
+        loadUserDetails();
         setListeners();
-        dateButton = binding.datePickerButton;
+        Button dateButton = binding.datePickerButton;
         dateButton.setText(getTodayDate());
         timeButton = binding.timeButton;
         timeButton.setHintTextColor(getResources().getColor(R.color.black));
+    }
+
+    private void loadUserDetails() {
+        binding.inputName.setText(preferenceManager.getString(Constants.KEY_NAME));
     }
 
     private void setListeners() {
@@ -49,8 +56,6 @@ public class ReservationActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private Boolean isValidReservationDetails() {
 
@@ -69,6 +74,9 @@ public class ReservationActivity extends AppCompatActivity {
         } else if (binding.datePickerButton.getText().toString().isEmpty()) {
             presentModal("Veuillez saisir la date");
             return false;
+        }else if (binding.datePickerButton.getText().toString().equals(getTodayDate())) {
+                presentModal("Veuillez vérifier la date");
+                return false;
         } else if (binding.timeButton.getText().toString().isEmpty()) {
             presentModal("Veuillez saisir l'heure");
             return false;
@@ -78,13 +86,13 @@ public class ReservationActivity extends AppCompatActivity {
     }
 
     private void navigateToSummary() {
-        String nom = binding.inputName.getText().toString();
-        String tel = binding.inputPhone.getText().toString();
-        String desti = binding.inputDropOff.getText().toString();
-        String rdv = binding.inputPickUp.getText().toString();
+        String nom = Objects.requireNonNull(binding.inputName.getText()).toString();
+        String tel = Objects.requireNonNull(binding.inputPhone.getText()).toString();
+        String desti = Objects.requireNonNull(binding.inputDropOff.getText()).toString();
+        String rdv = Objects.requireNonNull(binding.inputPickUp.getText()).toString();
         String  date = binding.datePickerButton.getText().toString();
         String heure = binding.timeButton.getText().toString();
-        String infos = binding.inputInfo.getText().toString();
+        String infos = Objects.requireNonNull(binding.inputInfo.getText()).toString();
         Intent intent = new Intent(ReservationActivity.this, SummaryActivity.class);
 
         intent.putExtra("nomprenom", nom);
@@ -183,24 +191,6 @@ public class ReservationActivity extends AppCompatActivity {
         timePickerDialog.setTitle("Heure du RDV");
         timePickerDialog.show();
     }
-
-    private void setTextUserData(FirebaseUser user) {
-        EditText saisieNom = findViewById(R.id.inputName);
-
-        //Get username from User
-        String username = TextUtils.isEmpty(user.getDisplayName()) ? getString(R.string.info_no_username_found) : user.getDisplayName();
-
-        //Update views with data
-        saisieNom.setText(username);
-    }
-
-    private void startSummaryActivity() {
-        Intent intent = new Intent(this,SummaryActivity.class);
-        startActivity(intent);
-    }
-
-
-
 
 }
 

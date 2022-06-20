@@ -76,7 +76,7 @@
     <string name="facebook_application_id">205701438038321</string>
     <string name="fb_login_protocol_scheme">fb205701438038321</string>
     <string name="default_notification_channel_desc">this the canal</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
@@ -104,5 +104,6 @@
     <string name="administrateur_bapoto">Administrateur BAPOTO</string>
     <string name="type_passWord">Entrez mot de passe pour continuer</string>
     <string name="on_line">En ligne</string>
+    <string name="new_admin">nouvel admin</string>
 
 </resources>

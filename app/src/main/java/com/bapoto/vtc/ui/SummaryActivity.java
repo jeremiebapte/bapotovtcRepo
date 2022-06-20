@@ -1,16 +1,24 @@
 package com.bapoto.vtc.ui;
 
+import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bapoto.bapoto.databinding.ActivitySummaryBinding;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -18,6 +26,7 @@ import java.util.HashMap;
 public class SummaryActivity extends AppCompatActivity {
     private ActivitySummaryBinding binding;
     private PreferenceManager preferenceManager;
+
 
     @Override
     protected void onRestart() {
@@ -131,6 +140,34 @@ public class SummaryActivity extends AppCompatActivity {
                 .addOnFailureListener(e -> {
                     showToast(e.getMessage());
                 });
+        updateUserProfile();
+
+    }
+
+    private void updateUserProfile() {
+        HashMap<String,Object> phoneNumber = new HashMap<>();
+        phoneNumber.put(Constants.KEY_PHONE_USER,binding.containerPhonr.getText().toString());
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        DocumentReference reference = db.collection(Constants.KEY_COLLECTION_USERS).document(preferenceManager.getString(Constants.KEY_USER_ID));
+        reference
+                .update(phoneNumber)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "DocumentSnapshot successfully updated!");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @SuppressLint("LongLogTag")
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error updating document", e);
+                    }
+                });
+
+
+
     }
 
     // Pop up for explain the send mail reservation

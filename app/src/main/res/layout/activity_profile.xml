@@ -99,7 +99,7 @@
         android:textColor="@color/secondary_text"
         android:textSize="@dimen/_9ssp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
+        app:layout_constraintHorizontal_bias="0.933"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageProfile" />
 
@@ -120,6 +120,21 @@
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewSupporter" />
+
+    <TextView
+        android:id="@+id/textNoChatMessage"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/_21sdp"
+        android:gravity="center"
+        android:textColor="@color/error"
+        android:textSize="@dimen/_12ssp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/chatRecyclerViw"
+        app:layout_constraintEnd_toEndOf="@+id/chatRecyclerViw"
+        app:layout_constraintHorizontal_bias="0.729"
+        app:layout_constraintStart_toStartOf="@+id/chatRecyclerViw" />
 
     <TextView
         android:id="@+id/tvMyReservations"

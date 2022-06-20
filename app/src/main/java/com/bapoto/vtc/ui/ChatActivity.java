@@ -133,9 +133,7 @@ public class ChatActivity extends BaseActivity {
     }
 
 
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
+
 
     private void sendNotification(String messageBody) {
         ApiClient.getClient().create(ApiService.class).sendMessage(
@@ -169,6 +167,10 @@ public class ChatActivity extends BaseActivity {
             showToast(t.getMessage());
             }
         });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void listenAvailabilityOfReceiver() {

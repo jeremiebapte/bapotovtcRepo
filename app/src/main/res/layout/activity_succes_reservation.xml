@@ -9,12 +9,12 @@
 
     <ImageView
         android:id="@+id/bapologoIv"
-        android:layout_width="258dp"
-        android:layout_height="249dp"
+        android:layout_width="276dp"
+        android:layout_height="276dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="88dp"
         android:layout_marginEnd="49dp"
-        android:background="@drawable/tool_logo"
+        android:background="@drawable/bapologo_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,7 +30,7 @@
         android:text="Réservation envoyée
         avec succès"
         android:textColor="@color/yellow"
-        android:textSize="30sp"
+        android:textSize="@dimen/_25ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
