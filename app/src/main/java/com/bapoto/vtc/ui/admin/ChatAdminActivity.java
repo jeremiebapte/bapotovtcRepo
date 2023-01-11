@@ -17,9 +17,9 @@ import com.bapoto.vtc.adapters.RecentConversationsAdapter;
 import com.bapoto.vtc.listeners.ConversionListener;
 import com.bapoto.vtc.model.Admin;
 import com.bapoto.vtc.model.ChatMessage;
-import com.bapoto.vtc.ui.ChatActivity;
-import com.bapoto.vtc.ui.SignInActivity;
-import com.bapoto.vtc.ui.UsersActivity;
+import com.bapoto.vtc.ui.user.ChatActivity;
+import com.bapoto.vtc.ui.user.SignInActivity;
+import com.bapoto.vtc.ui.user.UsersActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentChange;
@@ -92,7 +92,6 @@ public class ChatAdminActivity extends AppCompatActivity implements ConversionLi
                 .whereEqualTo(Constants.KEY_RECEIVER_ID,preferenceManager.getString(Constants.KEY_USER_ID))
                 .addSnapshotListener(eventListener);
     }
-
 
     private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
         if (error != null) {

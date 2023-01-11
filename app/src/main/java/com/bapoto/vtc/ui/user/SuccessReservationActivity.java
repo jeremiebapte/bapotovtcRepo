@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.user;
 
 import android.content.Intent;
 import android.os.Bundle;

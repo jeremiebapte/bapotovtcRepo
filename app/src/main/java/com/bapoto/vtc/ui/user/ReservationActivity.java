@@ -1,6 +1,4 @@
-package com.bapoto.vtc.ui;
-
-import static com.bapoto.vtc.utilities.Constants.KEY_PHONE;
+package com.bapoto.vtc.ui.user;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -16,8 +14,6 @@ import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityReservationBinding;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Locale;

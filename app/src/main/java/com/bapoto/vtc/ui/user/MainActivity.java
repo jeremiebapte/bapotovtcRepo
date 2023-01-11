@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.user;
 
 import android.Manifest;
 import android.app.FragmentManager;
@@ -16,6 +16,7 @@ import androidx.core.app.ActivityCompat;
 
 import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityMainBinding;
+import com.bapoto.vtc.utilities.BaseActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,7 +30,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends BaseActivity implements LocationListener {
     private LocationManager lm;
-    private static final int RC_SIGN_IN = 123;
     private static final int PERMS_CALL = 7;
     private PreferenceManager preferenceManager;
     private ActivityMainBinding binding;
@@ -67,8 +67,8 @@ public class MainActivity extends BaseActivity implements LocationListener {
     }
 
     private void setupListeners(){
-        binding.profileButton.setOnClickListener(view -> startProfileActivity());
-        binding.reservationButton.setOnClickListener(view -> startReservationActivity());
+        binding.fabProfile.setOnClickListener(view -> startProfileActivity());
+        binding.fabResa.setOnClickListener(view -> startReservationActivity());
 
     }
 
@@ -168,6 +168,7 @@ public class MainActivity extends BaseActivity implements LocationListener {
             LatLng googleLocation = new LatLng(latitude,longitude);
             googleMap.animateCamera(CameraUpdateFactory.newLatLng(googleLocation));
             googleMap.getMaxZoomLevel();
+
 
         }
 

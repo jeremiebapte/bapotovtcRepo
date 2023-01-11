@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.user;
 
 import android.content.Intent;
 import android.os.Build;
@@ -89,7 +89,7 @@ public class UsersActivity extends AppCompatActivity implements AdminListener {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClickedAdmin(Admin admin) {
-        Intent intent = new Intent(this,ChatActivity.class);
+        Intent intent = new Intent(this, ChatActivity.class);
         intent.putExtra(Constants.KEY_USER,admin);
         startActivity(intent);
         finish();

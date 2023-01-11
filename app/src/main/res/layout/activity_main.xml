@@ -6,61 +6,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/quantum_white_100"
-    tools:context="com.bapoto.vtc.ui.MainActivity">
+    tools:context="com.bapoto.vtc.ui.user.MainActivity">
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_425sdp"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/container_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/container_button"
-        android:layout_width="@dimen/_300sdp"
-        android:layout_height="@dimen/_130sdp"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_4sdp"
-        android:gravity="center"
-        android:orientation="vertical"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_user_profile"
+        android:backgroundTint="@color/yellow"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:tint="@color/white"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabResa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_24sdp"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/schedule"
+        android:background="@color/yellow"
+        android:backgroundTint="@color/yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
-        app:layout_constraintStart_toStartOf="parent">
+        android:tint="@color/white"/>
 
 
-        <android.widget.Button
-            android:id="@+id/profileButton"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="@drawable/gradient_button"
-            android:gravity="center"
-            android:fontFamily="@font/ubuntu_bold"
-            android:text="@string/connexion"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"/>
-
-
-        <android.widget.Button
-            android:id="@+id/reservation_button"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="@dimen/_200sdp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:background="@drawable/gradient_button"
-            android:gravity="center"
-            android:fontFamily="@font/ubuntu_bold"
-            android:text="@string/button_reservation"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_13ssp"/>
-
-
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

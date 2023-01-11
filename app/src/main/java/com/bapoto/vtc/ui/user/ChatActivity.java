@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.user;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +18,7 @@ import com.bapoto.vtc.model.Admin;
 import com.bapoto.vtc.model.ChatMessage;
 import com.bapoto.vtc.network.ApiClient;
 import com.bapoto.vtc.network.ApiService;
+import com.bapoto.vtc.utilities.BaseActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -93,10 +94,11 @@ public class ChatActivity extends BaseActivity {
         message.put(Constants.KEY_RECEIVER_ID,receiverAdmin.id);
         message.put(Constants.KEY_MESSAGE,binding.inputMessage.getText().toString());
         message.put(Constants.KEY_TIMESTAMP,new Date());
-        db.collection(Constants.KEY_COLLECTION_CHAT).add(message);
+        db.collection(Constants.KEY_COLLECTION_CHAT)
+                .add(message);
         if (conversionId != null) {
             updateConversion(binding.inputMessage.getText().toString());
-        updateConversion(binding.inputMessage.getText().toString());
+
     }else {
         HashMap<String, Object> conversion = new HashMap<>();
         conversion.put(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.KEY_USER_ID));
@@ -193,7 +195,6 @@ public class ChatActivity extends BaseActivity {
                     chatAdapter.setReceiverProfileImage(getBitmapFromEncodedString(receiverAdmin.image));
                     chatAdapter.notifyItemRangeInserted(0,chatMessages.size());
                 }
-
             }
             if (isReceiverAvailable) {
                 binding.textAvailability.setVisibility(View.VISIBLE);
@@ -213,7 +214,6 @@ public class ChatActivity extends BaseActivity {
                 .whereEqualTo(Constants.KEY_RECEIVER_ID,preferenceManager.getString(Constants.KEY_USER_ID))
                 .addSnapshotListener(eventListener);
     }
-
 
     private final EventListener<QuerySnapshot> eventListener = ((value, error) -> {
         if (error != null) {
@@ -255,7 +255,6 @@ public class ChatActivity extends BaseActivity {
             return null;
         }
     }
-
 
     private void loadReceiverDetails() {
         receiverAdmin = (Admin) getIntent().getSerializableExtra(Constants.KEY_USER);

@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.user;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,11 +10,12 @@ import android.util.Base64;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
-import com.bapoto.bapoto.databinding.ActivitySignUpBinding;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bapoto.bapoto.databinding.ActivitySignUpBinding;
 import com.bapoto.vtc.ui.admin.PassWordAdminActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
@@ -78,7 +79,7 @@ public class SignUpActivity extends AppCompatActivity {
                 preferenceManager.putString(Constants.KEY_NAME,binding.inputName.getText().toString());
                 preferenceManager.putString(Constants.KEY_EMAIL,binding.inputEmail.getText().toString());
                 preferenceManager.putString(Constants.KEY_IMAGE,encodedImage);
-                Intent intent = new Intent(this,MainActivity.class);
+                Intent intent = new Intent(this, MainActivity.class);
 
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

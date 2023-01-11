@@ -1,18 +1,14 @@
 package com.bapoto.vtc.ui.admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
-import com.bapoto.bapoto.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bapoto.bapoto.databinding.ActivitySignInAdminBinding;
-import com.bapoto.bapoto.databinding.ActivitySignInBinding;
-import com.bapoto.vtc.ui.MainActivity;
-import com.bapoto.vtc.ui.SignUpActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.google.firebase.firestore.DocumentSnapshot;

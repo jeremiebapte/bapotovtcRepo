@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,7 +37,7 @@ public class SignInActivity extends AppCompatActivity {
 
 
     private  void setListeners() {
-        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this,SignUpActivity.class)));
+        binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this, SignUpActivity.class)));
         binding.buttonSignIn.setOnClickListener(view -> {
             if (isValidSignInDetails()) {
                 signIn();

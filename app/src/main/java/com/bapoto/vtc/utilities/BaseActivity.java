@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.utilities;
 
 import android.os.Bundle;
 
@@ -40,7 +40,4 @@ public  class BaseActivity extends AppCompatActivity {
         documentReference.update(Constants.KEY_AVAILABILITY,1);
         docref.update(Constants.KEY_AVAILABILITY,1);
     }
-
-
-
 }

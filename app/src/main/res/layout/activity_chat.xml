@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/primary"
-    tools:context="com.bapoto.vtc.ui.ChatActivity">
+    tools:context="com.bapoto.vtc.ui.user.ChatActivity">
 
 
     <View

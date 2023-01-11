@@ -8,7 +8,7 @@
     android:overScrollMode="never"
     android:padding="@dimen/_24sdp"
     android:scrollbars="none"
-    tools:context="com.bapoto.vtc.ui.SignInActivity">
+    tools:context="com.bapoto.vtc.ui.user.SignInActivity">
 
 
     <LinearLayout

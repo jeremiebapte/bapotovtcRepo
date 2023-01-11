@@ -105,5 +105,6 @@
     <string name="type_passWord">Entrez mot de passe pour continuer</string>
     <string name="on_line">En ligne</string>
     <string name="new_admin">nouvel admin</string>
+    <string name="accepted_resa">Réservation acceptée</string>
 
 </resources>

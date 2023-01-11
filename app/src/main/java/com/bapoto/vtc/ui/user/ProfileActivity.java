@@ -1,4 +1,4 @@
-package com.bapoto.vtc.ui;
+package com.bapoto.vtc.ui.user;
 
 
 import android.annotation.SuppressLint;
@@ -24,8 +24,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityProfileBinding;
+import com.bapoto.bapoto.databinding.ItemReservationBinding;
 import com.bapoto.vtc.adapters.RecentConversationsAdapter;
 import com.bapoto.vtc.adapters.ReservationAdapter;
 import com.bapoto.vtc.listeners.ConversionListener;
@@ -45,6 +53,10 @@ import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -53,6 +65,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity implements ConversionListener {
 
@@ -62,18 +75,30 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
     private RecentConversationsAdapter conversationsAdapter;
     private FirebaseFirestore db;
     private ReservationAdapter adapter;
+    ItemReservationBinding bindingAdapter;
+    private RequestQueue mRequest;
+    private final String URL = "https://fcm.googleapis.com/fcm/send";
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+        mRequest = Volley.newRequestQueue(this);
         preferenceManager = new PreferenceManager(this);
         init();
         setupListeners();
         loadUserDetails();
         listenConversation();
+
+
     }
+
+
+
+
 
     @Override
     protected void onStart() {
@@ -94,6 +119,7 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
         db = FirebaseFirestore.getInstance();
         setupRecyclerView();
 
+
     }
 
     private void loadUserDetails() {
@@ -102,11 +128,13 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
         byte[] bytes = Base64.decode(preferenceManager.getString(Constants.KEY_IMAGE), Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         binding.imageProfile.setImageBitmap(bitmap);
-        binding.chatButton.setOnClickListener(view -> startActivity(new Intent(this, AdminActivity.class)));
+        binding.fabNewChat.setOnClickListener(view -> startActivity(new Intent(this, AdminActivity.class)));
     }
 
     private void setupListeners() {
         binding.imageSignOut.setOnClickListener(view -> alertSignOut());
+        binding.fabAllRideDone.setOnClickListener(view -> startAllRideUserActivity());
+        binding.fabResa.setOnClickListener(view -> startReservationActivity());
         binding.imageBack.setOnClickListener(view -> onBackPressed());
         binding.imageProfile.setOnClickListener(view -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -115,11 +143,65 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
         });
     }
 
+    private void startReservationActivity(){
+        Intent intent = new Intent(this, ReservationActivity.class);
+        startActivity(intent);
+    }
+    private void startAllRideUserActivity() {
+        Intent intent = new Intent(this,AllRideUserActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void sendNotification() {
+        JSONObject mainObject = new JSONObject();
+        try {
+            mainObject.put("to","topics/"+"news");
+            JSONObject notification  = new JSONObject();
+            notification.put("title", "any title");
+            notification.put("body", "anybody");
+            mainObject.put("notification",notification);
+
+
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
+                    mainObject,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }
+
+            ){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String,String> header = new HashMap<>();
+                    header.put("content-type","application/json");
+                    header.put("authorization","key=AAAAbtstbew:APA91bFYO-JEgRZNHCti1eQN-3Ug0_9aYC30mFqT3dlnuNhzewp0s95xtD3PRmjQy_xDPFBWuflXSt8i15_W4n-srhbbQ_c0XHHofRIsv1dkeNhXY2yMu2OWAzeTjdMTnqaZYex7KepP"
+                    );
+                    return header;
+                }
+            };
+
+            mRequest.add(request);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void setupRecyclerView() {
         CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
 
         Query query = reservationRef.orderBy(Constants.KEY_DATE, Query.Direction.DESCENDING)
                 .whereEqualTo(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.KEY_USER_ID));
+
+
         FirestoreRecyclerOptions<Reservation> options = new FirestoreRecyclerOptions.Builder<Reservation>()
                 .setQuery(query,Reservation.class)
                 .build();
@@ -132,10 +214,9 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-
-
-
     }
+
+
 
     private void listenConversation() {
         db.collection(Constants.KEY_COLLECTION_CONVERSATIONS)
@@ -195,10 +276,10 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
     };
 
     private void showErrorMessage() {
-
         binding.textNoChatMessage.setText(String.format("%s","Aucune discussion pour le moment..."));
         binding.textNoChatMessage.setVisibility(View.VISIBLE);
     }
+
 
     //PopUp for confirm the sign out
     public void alertSignOut() {
@@ -298,7 +379,7 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onConversionClicked(Admin admin) {
-        Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
         intent.putExtra(Constants.KEY_USER,admin);
         startActivity(intent);
 

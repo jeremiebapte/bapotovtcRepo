@@ -2,6 +2,8 @@ package com.bapoto.vtc.model;
 
 import androidx.annotation.Nullable;
 
+import com.google.firebase.Timestamp;
+
 public class Reservation {
 
      private String name;
@@ -12,15 +14,17 @@ public class Reservation {
      private String dropOff;
      private String hour;
      private String date;
+     private Timestamp dayAccepted;
      @Nullable
      private String infos;
      private User sender;
+
 
     public Reservation() {
     }
 
 
-    public Reservation(String name, String telephone, @Nullable String email, String pickUp, String dropOff,
+    public Reservation(String name, String telephone, @Nullable String email, Timestamp dayAccepted,String pickUp, String dropOff,
                        String hour, String date, @Nullable String infos) {
         this.name = name;
         this.telephone = telephone;
@@ -29,10 +33,12 @@ public class Reservation {
         this.dropOff = dropOff;
         this.hour = hour;
         this.date = date;
+        this.dayAccepted = dayAccepted;
         this.infos = infos;
+
     }
 
-    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, User sender) {
+    public Reservation(String nom, String tel, String desti, String rdv, String date, String hour, String infos, User sender, Boolean isAccepted) {
     }
 
     public String getName() {
@@ -84,6 +90,14 @@ public class Reservation {
         this.dropOff = dropOff;
     }
 
+    public Timestamp getDayAccepted() {
+        return dayAccepted;
+    }
+
+    public void setDayAccepted(Timestamp dayAccepted) {
+        this.dayAccepted = dayAccepted;
+    }
+
     public String getHour() {
         return hour;
     }
@@ -108,4 +122,6 @@ public class Reservation {
     public void setInfos(@Nullable String infos) {
         this.infos = infos;
     }
+
+
 }

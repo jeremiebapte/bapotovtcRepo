@@ -4,23 +4,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-
     <androidx.constraintlayout.widget.ConstraintLayout
-
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.bapoto.vtc.ui.ReservationActivity">
-
-        <!--        android:id="@+id/boutonNom"-->
-
+        tools:context="com.bapoto.vtc.ui.user.ReservationActivity">
 
         <android.widget.Button
-
             android:id="@+id/resaButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -1,13 +1,12 @@
 package com.bapoto.vtc.ui.admin;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bapoto.bapoto.databinding.ActivityPassWordAdminBinding;
-import com.bapoto.vtc.ui.admin.SignUpAdminActivity;
 
 public class PassWordAdminActivity extends AppCompatActivity {
     private ActivityPassWordAdminBinding binding;

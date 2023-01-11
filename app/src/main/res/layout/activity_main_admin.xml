@@ -14,11 +14,11 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:fontFamily="@font/ubuntu_bold"
-        android:includeFontPadding="false"
         android:text="Réservations"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="HardcodedText" />
 
     <LinearLayout
         android:id="@+id/layoutSearch"

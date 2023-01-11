@@ -13,15 +13,15 @@ import androidx.core.app.NotificationManagerCompat;
 
 import com.bapoto.bapoto.R;
 import com.bapoto.vtc.model.Admin;
-import com.bapoto.vtc.ui.ChatActivity;
-import com.bapoto.vtc.ui.MainActivity;
+import com.bapoto.vtc.ui.user.ChatActivity;
+import com.bapoto.vtc.ui.user.MainActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Random;
 
-public class MessagingService extends FirebaseMessagingService {
+public class MessagingService extends FirebaseMessagingService  {
 
 
     @Override
@@ -75,13 +75,14 @@ public class MessagingService extends FirebaseMessagingService {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void onReservationReceived(@NonNull RemoteMessage reservation) {
 
+
        Admin admin = new Admin();
        admin.id = reservation.getData().get(Constants.KEY_USER_ID);
        admin.name = reservation.getData().get(Constants.KEY_NAME);
        admin.token = reservation.getData().get(Constants.KEY_FCM_TOKEN);
 
         int notificationId = new Random().nextInt();
-        String channelId = "chat_message";
+        String channelId = "reservation";
 
 
         Intent intent = new Intent(this, MainActivity.class);

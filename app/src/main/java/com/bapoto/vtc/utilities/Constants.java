@@ -41,6 +41,8 @@ public class Constants {
     public static final String REMOTE_MSG_DATA = "data";
     public static final String REMOTE_MSG_REGISTRATION = "registration_ids";
     public static final String KEY_PHONE_USER = "phone2";
+    public static final String IS_ACCEPTED = "isAccepted";
+    public static final String KEY_ACCEPTED_THE = "dayAccepted";
 
 
     public static HashMap<String, String> remoteMsgHeaders = null;
