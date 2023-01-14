@@ -14,7 +14,10 @@ public class Reservation {
      private String dropOff;
      private String hour;
      private String date;
+     @Nullable
+     private int price;
      private Timestamp dayAccepted;
+     private Timestamp dayFinished;
      @Nullable
      private String infos;
      private User sender;
@@ -24,8 +27,8 @@ public class Reservation {
     }
 
 
-    public Reservation(String name, String telephone, @Nullable String email, Timestamp dayAccepted,String pickUp, String dropOff,
-                       String hour, String date, @Nullable String infos) {
+    public Reservation(String name, String telephone, @Nullable String email, Timestamp dayAccepted,Timestamp dayFinished, String pickUp, String dropOff,
+                       String hour,@Nullable int price, String date, @Nullable String infos) {
         this.name = name;
         this.telephone = telephone;
         this.email = email;
@@ -34,6 +37,8 @@ public class Reservation {
         this.hour = hour;
         this.date = date;
         this.dayAccepted = dayAccepted;
+        this.dayFinished = dayFinished;
+        this.price = price;
         this.infos = infos;
 
     }
@@ -96,6 +101,23 @@ public class Reservation {
 
     public void setDayAccepted(Timestamp dayAccepted) {
         this.dayAccepted = dayAccepted;
+    }
+
+    public Timestamp getDayFinished() {
+        return dayFinished;
+    }
+
+    @Nullable
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(@Nullable int price) {
+        this.price = price;
+    }
+
+    public void setDayFinished(Timestamp dayFinished) {
+        this.dayFinished = dayFinished;
     }
 
     public String getHour() {

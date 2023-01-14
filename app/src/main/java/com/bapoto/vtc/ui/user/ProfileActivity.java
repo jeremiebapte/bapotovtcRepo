@@ -199,6 +199,7 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
         CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
 
         Query query = reservationRef.orderBy(Constants.KEY_DATE, Query.Direction.DESCENDING)
+                .whereEqualTo(Constants.KEY_IS_FINISHED,false)
                 .whereEqualTo(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.KEY_USER_ID));
 
 

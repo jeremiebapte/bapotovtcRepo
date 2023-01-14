@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_reservation"
-    tools:context="com.bapoto.vtc.ui.admin.MainAdminActivity">
+    tools:context="com.bapoto.vtc.ui.admin.RideFinishedActivity">
+
 
     <TextView
         android:id="@+id/textReservation"
@@ -15,7 +16,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:fontFamily="@font/ubuntu_bold"
-        android:text="Réservations"
+        android:text="Réservations Terminées"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintTop_toTopOf="parent"
@@ -62,7 +63,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reservationRecyclerView"
+        android:id="@+id/rideFinishedRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_2sdp"
@@ -110,4 +111,7 @@
             android:src="@drawable/schedule"
             app:tint="@color/colorIcons" />
     </LinearLayout>
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

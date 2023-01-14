@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapoto.R;
 import com.bapoto.vtc.model.Reservation;
+import com.bapoto.vtc.utilities.Constants;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.Date;
 
 public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, ReservationAdapter.ReservationHolder> {
 
@@ -33,8 +36,12 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
         if (model.getDayAccepted()!= null) {
             holder.tvResaAccepted.setText(String.format("%s","Réservation Acceptée!!"));
             holder.tvResaAccepted.setVisibility(View.VISIBLE);
+        } else if (model.getDayFinished() != null) {
+            holder.tvrideFinished.setText(String.format("%s","Réservation Terminée!!"));
+            holder.tvrideFinished.setVisibility(View.VISIBLE);
         } else {
             holder.tvResaAccepted.setVisibility(View.INVISIBLE);
+            holder.tvrideFinished.setVisibility(View.INVISIBLE);
         }
 
     }
@@ -50,9 +57,12 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
 
     }
 
-    public void deleteItem(int position) {
-        getSnapshots().getSnapshot(position).getReference().delete();
+    public void markAsFinished(int position) {
+        getSnapshots().getSnapshot(position).getReference().update(Constants.KEY_IS_FINISHED,true);
+        getSnapshots().getSnapshot(position).getReference().update(Constants.KEY_FINISHED_THE,new Date());
     }
+
+
 
 
     public class ReservationHolder extends RecyclerView.ViewHolder {
@@ -62,6 +72,7 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
         TextView tvHour;
         TextView tvName;
         TextView tvResaAccepted;
+        TextView tvrideFinished;
 
 
         public ReservationHolder(@NonNull View itemView) {
@@ -72,6 +83,7 @@ public class ReservationAdapter extends FirestoreRecyclerAdapter <Reservation, R
             tvDate = itemView.findViewById(R.id.tvDate);
             tvHour = itemView.findViewById(R.id.tvHour);
             tvResaAccepted = itemView.findViewById(R.id.tvIsAccepted);
+            tvrideFinished = itemView.findViewById(R.id.tvIsFinished);
 
 
 

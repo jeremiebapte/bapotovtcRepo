@@ -1,5 +1,6 @@
 package com.bapoto.vtc.ui.user;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,8 +16,12 @@ import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.text.ParseException;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class AllRideUserActivity extends AppCompatActivity {
     private ActivityAllRideUserBinding binding;
@@ -37,31 +42,34 @@ public class AllRideUserActivity extends AppCompatActivity {
 
 
     private void setListeners() {
-        binding.imageBack.setOnClickListener(view -> {onBackPressed();});
+        binding.imageBack.setOnClickListener(view -> onBackPressed());
 
     }
 
 
     private void setupRecyclerView() {
-        Query query = reservationRef.orderBy(Constants.KEY_DATE, Query.Direction.DESCENDING)
-                .whereEqualTo(Constants.IS_ACCEPTED,true)
-                .whereEqualTo(Constants.KEY_SENDER_ID,preferenceManager.getString(Constants.KEY_USER_ID));
+        Query query = reservationRef.whereEqualTo(Constants.KEY_IS_FINISHED, true)
+                .whereEqualTo(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
 
 
         FirestoreRecyclerOptions<Reservation> options = new FirestoreRecyclerOptions.Builder<Reservation>()
-                .setQuery(query,Reservation.class)
+                .setQuery(query, Reservation.class)
                 .build();
 
         adapter = new AllRideUserAdapter(options);
 
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         RecyclerView recyclerView = binding.allRideRecyclerView;
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
+        //adapter.setOnTextViewClickListener(((documentSnapshot, positon) -> alertCreateInvoice()));
+
     }
+
+
 
     @Override
     protected void onStart() {

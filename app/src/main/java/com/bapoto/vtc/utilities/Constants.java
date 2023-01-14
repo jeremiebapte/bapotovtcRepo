@@ -43,6 +43,9 @@ public class Constants {
     public static final String KEY_PHONE_USER = "phone2";
     public static final String IS_ACCEPTED = "isAccepted";
     public static final String KEY_ACCEPTED_THE = "dayAccepted";
+    public static final String KEY_IS_FINISHED = "isFinished";
+    public static final String KEY_FINISHED_THE = "dayFinished";
+    public static final String KEY_PRICE = "price";
 
 
     public static HashMap<String, String> remoteMsgHeaders = null;

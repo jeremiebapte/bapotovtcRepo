@@ -22,6 +22,8 @@ import com.bapoto.vtc.network.ApiClient;
 import com.bapoto.vtc.network.ApiService;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -33,6 +35,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicReference;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,19 +43,13 @@ import retrofit2.Callback;
 public class SummaryActivity extends AppCompatActivity {
     private ActivitySummaryBinding binding;
     private PreferenceManager preferenceManager;
-    private Admin receiverAdmin;
-    private RequestQueue mRequest;
-    private final String URL = "https://fcm.googleapis.com/fcm/send";
-
-
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
     protected void onRestart() {
         super.onRestart();
         animationAndGoBackToMain();
     }
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,9 +59,7 @@ public class SummaryActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setTextViews();
         setListeners();
-        FirebaseMessaging.getInstance().subscribeToTopic("news");
         preferenceManager = new PreferenceManager(this);
-        mRequest = Volley.newRequestQueue(this);
 
     }
 
@@ -146,7 +141,6 @@ public class SummaryActivity extends AppCompatActivity {
 
     // Create a new reservation
     private void createReservation() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
         HashMap<String, Object> reservation = new HashMap<>();
         reservation.put(Constants.KEY_NAME, binding.containerName.getText().toString());
         reservation.put(Constants.KEY_PHONE, binding.containerPhonr.getText().toString());
@@ -155,57 +149,17 @@ public class SummaryActivity extends AppCompatActivity {
         reservation.put(Constants.KEY_DATE, binding.containerDate.getText().toString());
         reservation.put(Constants.KEY_HOUR, binding.containerHour.getText().toString());
         reservation.put(Constants.KEY_INFOS, binding.containerInfos.getText().toString());
+        reservation.put(Constants.IS_ACCEPTED,false);
+        reservation.put(Constants.KEY_IS_FINISHED,false);
+        reservation.put(Constants.KEY_PRICE,"");
         reservation.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
         db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
                 .add(reservation)
                 .addOnSuccessListener(documentReference -> preferenceManager.putString(Constants.KEY_SENDER_ID, documentReference.getId()))
                 .addOnFailureListener(e -> showToast(e.getMessage()));
-        sendNotification("Nouvelle réservation");
+
 
     }
-
-    private void sendNotification(String messageBody) {
-        JSONObject mainObject = new JSONObject();
-        try {
-            mainObject.put("to","topics/"+"news");
-            JSONObject notification  = new JSONObject();
-            notification.put("title", "any title");
-            notification.put("body", "anybody");
-            mainObject.put("notification",notification);
-
-
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
-                    mainObject,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            }
-
-            ){
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String,String> header = new HashMap<>();
-                    header.put("content-type","application/json");
-                    header.put("authorization","key=AAAAbtstbew:APA91bFYO-JEgRZNHCti1eQN-3Ug0_9aYC30mFqT3dlnuNhzewp0s95xtD3PRmjQy_xDPFBWuflXSt8i15_W4n-srhbbQ_c0XHHofRIsv1dkeNhXY2yMu2OWAzeTjdMTnqaZYex7KepP"
-);
-                    return header;
-                }
-            };
-
-            mRequest.add(request);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 
     // Pop up for explain the send mail reservation
     public void presentModal() {

@@ -18,6 +18,15 @@
         android:theme="@style/Theme.Bapotovtc"
         tools:ignore="DataExtractionRules">
         <activity
+            android:name=".invoiceActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.admin.RideFinishedActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.bapoto.vtc.ui.admin.RideAcceptedActivity"
+            android:exported="false" />
+        <activity
             android:name="com.bapoto.vtc.ui.user.AllRideUserActivity"
             android:exported="false" />
         <activity

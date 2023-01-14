@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary_reservation"
-    tools:context="com.bapoto.vtc.ui.admin.MainAdminActivity">
+    tools:context="com.bapoto.vtc.ui.admin.RideAcceptedActivity">
 
     <TextView
         android:id="@+id/textReservation"
@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:fontFamily="@font/ubuntu_bold"
-        android:text="Réservations"
+        android:text="Réservations Acceptées"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintTop_toTopOf="parent"
@@ -62,7 +62,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reservationRecyclerView"
+        android:id="@+id/acceptedRideRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_2sdp"
@@ -86,12 +86,14 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
-            android:id="@+id/imageOpenChat"
-            android:layout_width="@dimen/_23sdp"
+            android:id="@+id/allRide"
+            android:layout_width="wrap_content"
             android:layout_height="@dimen/_23sdp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_chat"
+            android:src="@drawable/ic_list"
             app:tint="@color/colorIcons" />
+
+
 
         <ImageView
             android:id="@+id/rideAccepted"
@@ -109,5 +111,17 @@
             android:layout_height="@dimen/_23sdp"
             android:src="@drawable/schedule"
             app:tint="@color/colorIcons" />
+
+
+        <ImageView
+            android:id="@+id/imageOpenChat"
+            android:layout_width="@dimen/_23sdp"
+            android:layout_height="@dimen/_23sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_chat"
+            app:tint="@color/colorIcons" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,8 +12,10 @@ import com.bapoto.bapoto.R;
 import com.bapoto.vtc.model.Reservation;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class AllRideUserAdapter extends FirestoreRecyclerAdapter<Reservation, AllRideUserAdapter.AllRideUserHolder> {
+    private OnTextViewClickListener listener;
 
 
     public AllRideUserAdapter(@NonNull FirestoreRecyclerOptions<Reservation> options) {
@@ -38,7 +40,7 @@ public class AllRideUserAdapter extends FirestoreRecyclerAdapter<Reservation, Al
         return new AllRideUserHolder(v);
     }
 
-    static class AllRideUserHolder extends RecyclerView.ViewHolder{
+     class AllRideUserHolder extends RecyclerView.ViewHolder{
         TextView tvPickUP,tvDestination,tvDate,tvHour,tvName, tvGenerateBill;
 
         public AllRideUserHolder(@NonNull View itemView) {
@@ -49,9 +51,24 @@ public class AllRideUserAdapter extends FirestoreRecyclerAdapter<Reservation, Al
             tvDate = itemView.findViewById(R.id.tvDate);
             tvHour = itemView.findViewById(R.id.tvHour);
             tvGenerateBill = itemView.findViewById(R.id.tvGenerateBill);
+
+            tvGenerateBill.setOnClickListener(view -> {
+                int positon = getBindingAdapterPosition();
+                if (positon!=RecyclerView.NO_POSITION && listener != null) {
+                    listener.onTextViewClick(getSnapshots().getSnapshot(positon),positon);
+                }
+
+
+            });
+
+
         }
     }
+    public interface OnTextViewClickListener{
+        void onTextViewClick(DocumentSnapshot documentSnapshot,int positon);
+    }
 
-
-
+    public  void setOnTextViewClickListener(OnTextViewClickListener listener) {
+        this.listener = listener;
+    }
 }
