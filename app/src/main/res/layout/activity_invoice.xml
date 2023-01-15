@@ -1,66 +1,435 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".invoiceActivity">
+    android:orientation="vertical"
+    tools:context="com.bapoto.vtc.ui.user.InvoiceActivity">
 
-    <EditText
-        android:id="@+id/editTextName"
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="FACTURE"
+            android:textColor="@color/holy_blue"
+            android:textSize="@dimen/_33ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="124dp"
+            android:layout_height="76dp"
+            android:layout_marginStart="@dimen/_60sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:src="@drawable/bapologo_white">
+
+        </ImageView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="BAPOTO VTC"
+            android:textColor="@color/holy_blue"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="828849224"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="FACTURE A : "
+                android:textColor="@color/holy_blue"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvInvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:text="Jon Snow "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold">
+
+            </TextView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_60sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="FACTURE N° : "
+                android:textColor="@color/holy_blue"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="DATE "
+                android:textColor="@color/holy_blue"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_45sdp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvInvNb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:text="001 "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvInvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:text="11/12 "
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold">
+
+            </TextView>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_3sdp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/error"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_18sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/divider">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="DESIGNATION "
+            android:textColor="@color/holy_blue"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_140sdp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:text="MONTANT "
+            android:textColor="@color/holy_blue"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+
+    </LinearLayout>
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_5sdp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/error"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/divider2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="Trajet "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvInvDesignation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="Namek - Pluton "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvPriceHT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_157sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="001 "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_160sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="Total HT "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvTotalHT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_72sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="001 "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_22sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_160sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="10% "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvTotalTTC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_90sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="001 "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_160sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="TOTAL TTC "
+            android:textColor="@color/holy_blue"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/tvTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_47sdp"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:fontFamily="@font/ubuntu_regular"
+            android:text="001 "
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold">
+
+        </TextView>
+
+
+
+
+    </LinearLayout>
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:hint="Customer Name"
-        android:inputType="textPersonName"
-        android:text="Ram"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="32dp" />
+        android:layout_marginBottom="40dp"
+        android:src="@drawable/ic_correct"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.907"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="211dp"
-        android:layout_height="52dp"
-        android:layout_below="@+id/editTextName"
-        android:layout_alignStart="@+id/editTextName"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="-1dp" />
 
-    <EditText
-        android:id="@+id/editTextQty"
-        android:layout_width="111dp"
-        android:layout_height="52dp"
-        android:layout_alignTop="@+id/spinner"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/spinner"
-        android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="2" />
-
-    <Button
-        android:id="@+id/btnSaveAndPrint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner"
-        android:layout_alignStart="@+id/spinner"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="40dp"
-        android:text="Save and Print" />
-
-    <Button
-        android:id="@+id/btnPrint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/btnSaveAndPrint"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/btnSaveAndPrint"
-        android:text="Print" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

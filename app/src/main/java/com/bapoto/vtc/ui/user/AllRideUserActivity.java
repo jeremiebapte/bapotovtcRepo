@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.bapoto.bapoto.R;
@@ -21,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import java.text.ParseException;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class AllRideUserActivity extends AppCompatActivity {
@@ -65,10 +67,27 @@ public class AllRideUserActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        //adapter.setOnTextViewClickListener(((documentSnapshot, positon) -> alertCreateInvoice()));
+        adapter.setOnTextViewClickListener(((documentSnapshot, positon) -> navigateToInvoice()));
 
     }
 
+    private void navigateToInvoice() {
+        adapter.setOnTextViewClickListener((documentSnapshot, positon) -> {
+            AtomicReference<String> docid = new AtomicReference<>(documentSnapshot.getId());
+            Reservation resa = documentSnapshot.toObject(Reservation.class);
+
+            String name = Objects.requireNonNull(resa).getName();
+            String date = resa.getDate();
+            String price = String.valueOf(resa.getPrice());
+            Intent intent = new Intent(AllRideUserActivity.this,InvoiceActivity.class);
+
+            intent.putExtra("name",name);
+            intent.putExtra("date",date);
+            intent.putExtra("price",price);
+
+            startActivity(intent);
+        });
+    }
 
 
     @Override

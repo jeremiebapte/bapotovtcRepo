@@ -104,7 +104,7 @@ public class RideFinishedActivity extends AppCompatActivity {
 
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Montant pour : " + Objects.requireNonNull(resa).getDate());
+            builder.setTitle("Montant pour la réservation du: " + Objects.requireNonNull(resa).getDate());
 
 // Set up the input
             final EditText input = new EditText(this);

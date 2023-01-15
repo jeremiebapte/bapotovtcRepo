@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Bapotovtc"
         tools:ignore="DataExtractionRules">
         <activity
+            android:name="com.bapoto.vtc.ui.user.InvoiceActivity"
+            android:exported="false" />
+        <activity
             android:name=".invoiceActivity"
             android:exported="false" />
         <activity

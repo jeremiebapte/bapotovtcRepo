@@ -25,6 +25,10 @@
         <color name="colorSand">#EBCB94</color>
         <color name="brown">#795548</color>
 
+        <color name="blue">#3A52FC</color>
+        <color name="holy_blue">#1C2E46</color>
+        <color name="dark_blue">#142232</color>
+
 
         <color name="colorSearchBackground">#333333</color>
         <color name="colorTextHint">#7B7B7B</color>
