@@ -97,11 +97,9 @@ public class RideFinishedActivity extends AppCompatActivity {
     }
 
     private void addPriceToTheRide() {
-
         adapter.setOnItemClickListener((documentSnapshot, position) -> {
             AtomicReference<String> docid = new AtomicReference<>(documentSnapshot.getId());
             Reservation resa = documentSnapshot.toObject(Reservation.class);
-
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Montant pour la réservation du: " + Objects.requireNonNull(resa).getDate());
@@ -123,6 +121,9 @@ public class RideFinishedActivity extends AppCompatActivity {
 
 
             });
+            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+            builder.show();
         });
     }
 }

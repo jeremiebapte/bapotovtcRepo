@@ -115,7 +115,6 @@ public class RideAcceptedActivity extends AppCompatActivity {
         adapter.setOnItemClickListener((documentSnapshot, position) -> {
             AtomicReference<String> docId = new AtomicReference<>(documentSnapshot.getId());
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-            PreferenceManager preferenceManager = new PreferenceManager(this);
             // set title
             alertDialogBuilder.setTitle("RÉSERVATION");
             alertDialogBuilder.setIcon(R.drawable.ic_thumb_up);

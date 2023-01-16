@@ -79,11 +79,16 @@ public class AllRideUserActivity extends AppCompatActivity {
             String name = Objects.requireNonNull(resa).getName();
             String date = resa.getDate();
             String price = String.valueOf(resa.getPrice());
+            String pickUp = resa.getPickUp();
+            String dropOff = resa.getDropOff();
             Intent intent = new Intent(AllRideUserActivity.this,InvoiceActivity.class);
 
             intent.putExtra("name",name);
             intent.putExtra("date",date);
             intent.putExtra("price",price);
+            intent.putExtra("pickUp",pickUp);
+            intent.putExtra("dropOff",dropOff);
+
 
             startActivity(intent);
         });

@@ -151,7 +151,7 @@ public class SummaryActivity extends AppCompatActivity {
         reservation.put(Constants.KEY_INFOS, binding.containerInfos.getText().toString());
         reservation.put(Constants.IS_ACCEPTED,false);
         reservation.put(Constants.KEY_IS_FINISHED,false);
-        reservation.put(Constants.KEY_PRICE,"");
+        reservation.put(Constants.KEY_PRICE,0);
         reservation.put(Constants.KEY_SENDER_ID, preferenceManager.getString(Constants.KEY_USER_ID));
         db.collection(Constants.KEY_COLLECTION_RESERVATIONS)
                 .add(reservation)
