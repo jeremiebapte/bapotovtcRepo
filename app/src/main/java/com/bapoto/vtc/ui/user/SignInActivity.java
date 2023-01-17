@@ -37,6 +37,7 @@ public class SignInActivity extends AppCompatActivity {
 
 
     private  void setListeners() {
+        binding.cgu.setOnClickListener(view -> startActivity(new Intent(this,TermOfUseActivity.class)));
         binding.textCreateNewAccount.setOnClickListener(view -> startActivity(new Intent(this, SignUpActivity.class)));
         binding.buttonSignIn.setOnClickListener(view -> {
             if (isValidSignInDetails()) {

@@ -1,19 +1,16 @@
 package com.bapoto.vtc.ui.admin;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bapoto.bapoto.R;
-import com.bapoto.bapoto.databinding.ActivityMainAdminBinding;
 import com.bapoto.bapoto.databinding.ActivityRideFinishedBinding;
 import com.bapoto.vtc.adapters.ReservationAdapter;
 import com.bapoto.vtc.model.Reservation;
