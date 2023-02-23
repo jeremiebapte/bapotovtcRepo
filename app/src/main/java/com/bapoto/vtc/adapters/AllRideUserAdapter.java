@@ -41,7 +41,7 @@ public class AllRideUserAdapter extends FirestoreRecyclerAdapter<Reservation, Al
     }
 
      class AllRideUserHolder extends RecyclerView.ViewHolder{
-        TextView tvPickUP,tvDestination,tvDate,tvHour,tvName, tvGenerateBill;
+         final TextView  tvPickUP,tvDestination,tvDate,tvHour,tvName, tvGenerateBill;
 
         public AllRideUserHolder(@NonNull View itemView) {
             super(itemView);

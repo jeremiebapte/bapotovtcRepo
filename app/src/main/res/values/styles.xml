@@ -5,8 +5,8 @@
     <!-- THEMES-->
 
     <style name="Bapotovtc" parent="Theme.AppCompat.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorError">@color/colorError</item>
         <item name="android:textViewStyle">@style/BapotoText</item>

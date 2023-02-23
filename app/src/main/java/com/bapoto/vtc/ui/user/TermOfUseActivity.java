@@ -1,11 +1,10 @@
 package com.bapoto.vtc.ui.user;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.bapoto.bapoto.R;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bapoto.bapoto.databinding.ActivityTermOfUseBinding;
 
 public class TermOfUseActivity extends AppCompatActivity {

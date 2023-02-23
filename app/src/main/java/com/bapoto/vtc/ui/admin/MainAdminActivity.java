@@ -1,21 +1,17 @@
 package com.bapoto.vtc.ui.admin;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityMainAdminBinding;
 import com.bapoto.vtc.adapters.ReservationAdapter;
+import com.bapoto.vtc.model.Admin;
 import com.bapoto.vtc.model.Reservation;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
@@ -24,7 +20,12 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.jetbrains.annotations.Nullable;
+import org.json.JSONException;
+
+import java.io.IOException;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -35,16 +36,33 @@ public class MainAdminActivity extends AppCompatActivity {
     private final CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
     private ReservationAdapter adapter;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainAdminBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Admin admin = new Admin();
+        try {
+            suscribeToTopic();
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
         setListeners();
+
+
         setupRecyclerView();
     }
 
+    private void suscribeToTopic() throws JSONException, IOException {
+        FirebaseMessaging.getInstance().subscribeToTopic("admin_channel")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        System.out.println("Succès de l'abonnement aux événements d'inscription des chauffeurs");
+                    } else {
+                        System.out.println("Échec de l'abonnement aux événements d'inscription des chauffeurs");
+                    }
+                });
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -57,7 +75,6 @@ public class MainAdminActivity extends AppCompatActivity {
         adapter.stopListening();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setListeners() {
 
         binding.imageOpenChat.setOnClickListener(view -> {startChatActivity();});
@@ -77,6 +94,7 @@ public class MainAdminActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
     private void startRideFinishedActivity(){
         Intent intent = new Intent(this,RideFinishedActivity.class);
         startActivity(intent);

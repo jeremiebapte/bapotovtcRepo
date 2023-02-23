@@ -53,6 +53,7 @@
         <entry key="app/src/main/res/drawable/baseline_settings_24.xml" value="0.2325" />
         <entry key="app/src/main/res/drawable/button_radius_accent_color.xml" value="0.271" />
         <entry key="app/src/main/res/drawable/button_radius_error_color.xml" value="0.271" />
+        <entry key="app/src/main/res/drawable/button_radius_primary_color.xml" value="0.194" />
         <entry key="app/src/main/res/drawable/ic_grey_search_24.xml" value="0.271" />
         <entry key="app/src/main/res/drawable/ic_person.xml" value="0.271" />
         <entry key="app/src/main/res/drawable/profile_background.xml" value="0.271" />

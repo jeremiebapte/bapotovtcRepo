@@ -1,16 +1,14 @@
 package com.bapoto.vtc.ui.admin;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bapoto.bapoto.databinding.ActivityChatAdminBinding;
 import com.bapoto.vtc.adapters.RecentConversationsAdapter;
@@ -22,13 +20,15 @@ import com.bapoto.vtc.ui.user.SignInActivity;
 import com.bapoto.vtc.ui.user.UsersActivity;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -137,8 +137,9 @@ public class ChatAdminActivity extends AppCompatActivity implements ConversionLi
         }
     };
 
-    private void getToken(){
-        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(this::updateToken);
+    private void getToken() throws FirebaseAuthException {
+        FirebaseUser mUser = FirebaseAuth.getInstance().getUser(Constants.KEY_USER_ID);
+        mUser.getIdToken(true);
     }
 
     private void updateToken(String token) {
@@ -172,7 +173,6 @@ public class ChatAdminActivity extends AppCompatActivity implements ConversionLi
                 .addOnFailureListener(e -> showToast("Déconnexion impossible"));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onConversionClicked(Admin admin) {
         Intent intent = new Intent(this, ChatActivity.class);

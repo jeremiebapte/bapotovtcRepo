@@ -1,27 +1,22 @@
 package com.bapoto.vtc.ui.user;
 
-import androidx.appcompat.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-
-import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityAllRideUserBinding;
 import com.bapoto.vtc.adapters.AllRideUserAdapter;
-import com.bapoto.vtc.adapters.ReservationAdapter;
 import com.bapoto.vtc.model.Reservation;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.text.ParseException;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicReference;
 

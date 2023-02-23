@@ -5,40 +5,15 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.bapoto.bapoto.databinding.ActivitySummaryBinding;
-import com.bapoto.vtc.model.Admin;
-import com.bapoto.vtc.network.ApiClient;
-import com.bapoto.vtc.network.ApiService;
 import com.bapoto.vtc.utilities.Constants;
 import com.bapoto.vtc.utilities.PreferenceManager;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.messaging.FirebaseMessaging;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Method;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.atomic.AtomicReference;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class SummaryActivity extends AppCompatActivity {
     private ActivitySummaryBinding binding;
@@ -49,6 +24,7 @@ public class SummaryActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
         animationAndGoBackToMain();
+
     }
 
     @Override
@@ -164,8 +140,7 @@ public class SummaryActivity extends AppCompatActivity {
     // Pop up for explain the send mail reservation
     public void presentModal() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setPositiveButton("OK", (dialog, id) ->
-                sendReservationMail());
+        builder.setPositiveButton("OK", (dialog, id) -> sendReservationMail());
         builder.setTitle("ENVOI RÉSERVATION");
         builder.setMessage("Tout est OK ? \n" +
                 "\nCliquez sur ENVOI puis choisissez votre service de messagerie habituel pour" +
@@ -174,7 +149,14 @@ public class SummaryActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
 
+
     }
+
+
+
+
+
+
 
 }
 

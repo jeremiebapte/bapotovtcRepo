@@ -10,8 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.core.app.ActivityCompat;
 
 import com.bapoto.bapoto.R;
@@ -26,6 +25,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONException;
+
+import java.io.IOException;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 
 public class MainActivity extends BaseActivity implements LocationListener {
@@ -46,6 +52,11 @@ public class MainActivity extends BaseActivity implements LocationListener {
         setupListeners();
         getToken();
         preferenceManager = new PreferenceManager(this);
+        try {
+            suscribeToTopic();
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+        }
 
         FragmentManager fragmentManager = getFragmentManager();
         mapFragment = (MapFragment) fragmentManager.findFragmentById(R.id.map);
@@ -70,6 +81,17 @@ public class MainActivity extends BaseActivity implements LocationListener {
         binding.fabProfile.setOnClickListener(view -> startProfileActivity());
         binding.fabResa.setOnClickListener(view -> startReservationActivity());
 
+    }
+
+    private void suscribeToTopic() throws JSONException, IOException {
+        FirebaseMessaging.getInstance().subscribeToTopic("new_driver")
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        System.out.println("Succès de l'abonnement aux événements d'inscription des chauffeurs");
+                    } else {
+                        System.out.println("Échec de l'abonnement aux événements d'inscription des chauffeurs");
+                    }
+                });
     }
 
 
@@ -137,7 +159,7 @@ public class MainActivity extends BaseActivity implements LocationListener {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @Nonnull String[] permissions, @Nonnull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == PERMS_CALL) {
             checkPermissions();
@@ -145,12 +167,12 @@ public class MainActivity extends BaseActivity implements LocationListener {
     }
 
     @Override
-    public void onProviderEnabled(@NonNull String provider) {
+    public void onProviderEnabled(@Nonnull String provider) {
         LocationListener.super.onProviderEnabled(provider);
     }
 
     @Override
-    public void onProviderDisabled(@NonNull String provider) {
+    public void onProviderDisabled(@Nonnull String provider) {
         LocationListener.super.onProviderDisabled(provider);
     }
 
@@ -160,7 +182,7 @@ public class MainActivity extends BaseActivity implements LocationListener {
     }
 
     @Override
-    public void onLocationChanged(@NonNull Location location) {
+    public void onLocationChanged(@Nonnull Location location) {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
 

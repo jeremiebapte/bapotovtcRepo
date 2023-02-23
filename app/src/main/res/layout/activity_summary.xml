@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:overScrollMode="never"
+    android:background="@color/grey_background"
     android:padding="@dimen/_24sdp"
     android:scrollbars="none"
     tools:context="com.bapoto.vtc.ui.user.SummaryActivity">
@@ -24,58 +25,103 @@
          android:layout_marginBottom="@dimen/_50sdp"
          android:textColor="@color/black"
          android:textSize="@dimen/_24ssp"
+         android:fontFamily="@font/ubuntu_bold"
          android:textStyle="bold"/>
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+       <ImageView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/ic_user_profile"/>
 
      <TextView
          android:id="@+id/containerName"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_marginTop="@dimen/_20sdp"
          android:text="NOM PRENOM"
-         android:layout_marginBottom="@dimen/_30sdp"
+         android:layout_marginStart="@dimen/_10sdp"
          android:textColor="@color/black"
          android:textSize="@dimen/_18ssp"
-         android:layout_gravity="start"
          android:fontFamily="@font/ubuntu_regular"/>
 
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:src="@drawable/ic_phone"/>
 
      <TextView
          android:id="@+id/containerPhonr"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_marginTop="@dimen/_20sdp"
+         android:layout_marginStart="@dimen/_10sdp"
          android:text="TELEPHONE"
          android:textColor="@color/black"
          android:textSize="@dimen/_18ssp"
-         android:layout_marginBottom="@dimen/_20sdp"
-         android:layout_gravity="start"
          android:fontFamily="@font/ubuntu_regular"/>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_location"/>
      <TextView
          android:id="@+id/containerPickUp"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_marginTop="@dimen/_20sdp"
          android:text="PRISE EN CHARGE"
          android:textColor="@color/black"
          android:textSize="@dimen/_18ssp"
-         android:layout_gravity="start"
-         android:layout_marginBottom="@dimen/_10sdp"
          android:fontFamily="@font/ubuntu_regular"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_drop"/>
 
      <TextView
          android:id="@+id/containerDropOff"
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
-         android:layout_marginTop="@dimen/_20sdp"
-
          android:text="DESTINATION"
          android:textColor="@color/black"
          android:textSize="@dimen/_18ssp"
-         android:layout_gravity="start"
          android:fontFamily="@font/ubuntu_regular"/>
+    </LinearLayout>
 
      <LinearLayout
          android:layout_width="match_parent"
@@ -83,27 +129,55 @@
          android:gravity="clip_horizontal"
          android:orientation="horizontal">
 
+
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="@dimen/_40sdp"
+                 android:layout_marginTop="@dimen/_35sdp"
+                 android:src="@drawable/ic_clock"/>
          <TextView
              android:id="@+id/containerHour"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:layout_marginTop="@dimen/_40sdp"
+             android:layout_marginTop="@dimen/_10sdp"
              android:text="HEURE"
              android:textColor="@color/black"
              android:layout_marginStart="@dimen/_30sdp"
              android:textSize="@dimen/_16ssp"
              android:fontFamily="@font/ubuntu_regular"/>
+         </LinearLayout>
 
+
+         <LinearLayout
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="@dimen/_55sdp"
+             android:orientation="vertical">
+
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_marginStart="@dimen/_40sdp"
+                 android:layout_marginTop="@dimen/_35sdp"
+                 android:src="@drawable/ic_date"/>
          <TextView
              android:id="@+id/containerDate"
              android:layout_width="wrap_content"
              android:layout_height="wrap_content"
-             android:layout_marginTop="@dimen/_40sdp"
+             android:layout_marginTop="@dimen/_10sdp"
              android:text="DATE"
              android:textColor="@color/black"
              android:textSize="@dimen/_16ssp"
-             android:layout_marginStart="@dimen/_100sdp"
+             android:layout_marginStart="@dimen/_30sdp"
              android:fontFamily="@font/ubuntu_regular"/>
+
+         </LinearLayout>
 
 
      </LinearLayout>

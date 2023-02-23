@@ -4,16 +4,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 32
-    buildToolsVersion "30.0.3"
+    compileSdk 32
 
     defaultConfig {
+
         applicationId "bapoto.vtc"
-        minSdkVersion 21
-        targetSdkVersion 32
-        versionCode 20
-        versionName "4.9.4"
-        // Enabling multidex support.
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,122 +29,61 @@ android {
     }
     buildFeatures {
         viewBinding true
-
-    }
-    buildFeatures{
         dataBinding true
+
+
     }
 }
 
 dependencies {
 
-
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation "androidx.coordinatorlayout:coordinatorlayout:1.2.0"
-    implementation 'androidx.core:core:1.8.0'
+    implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation "androidx.cardview:cardview:1.0.0"
-    implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
-    implementation 'com.google.android.libraries.places:places:3.0.0'
-    implementation "androidx.fragment:fragment:1.5.5"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.google.firebase:firebase-auth:21.1.0'
+
     testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-
-
-
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    //noinspection GradleCompatible
-    implementation 'com.android.support:design:28.0.0'
-
-
-
-
-    implementation 'com.google.android.material:material:1.7.0'
-// Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:30.1.0')
-
-    // Declare the dependencies for the In-App Messaging and Analytics libraries
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-inappmessaging-display'
-    implementation 'com.google.firebase:firebase-analytics'
-
-
-
-    //GLIDE
-    implementation 'com.github.bumptech.glide:glide:4.13.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
-
-    //EASY PERMISSIONS
-    implementation 'pub.devrel:easypermissions:3.0.0'
+    //Scalable Size Unit (suppor for differents size screen)
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
 
     // Rounded Image View
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
-    //FIREBASE
-    implementation platform('com.google.firebase:firebase-bom:28.0.1')
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-firestore'
-    implementation 'com.google.firebase:firebase-messaging'
+    //Firebase
     implementation 'com.google.firebase:firebase-messaging:23.1.1'
-    implementation 'com.google.firebase:firebase-auth:21.1.0'
-
-    //Scalable Size Unit (suppor for differents size screen)
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    implementation 'com.intuit.ssp:ssp-android:1.0.6'
+    implementation 'com.google.firebase:firebase-iid:21.1.0'
+    implementation 'com.google.firebase:firebase-installations:17.1.2'
+    implementation 'com.google.firebase:firebase-admin:9.1.1'
 
 
-    implementation 'com.google.firebase:firebase-analytics:21.2.0'
-    implementation 'com.google.firebase:firebase-database:20.1.0'
 
-    //EASY PERMISSIONS
-    implementation 'pub.devrel:easypermissions:3.0.0'
-
-    // FIREBASE UI
-    implementation 'com.firebaseui:firebase-ui-auth:8.0.0'
-    implementation 'com.firebaseui:firebase-ui-firestore:7.1.1'
-    implementation 'com.firebaseui:firebase-ui-storage:7.1.1'
-    implementation 'com.google.firebase:firebase-firestore:24.4.1'
-    implementation 'com.google.firebase:firebase-core:21.1.1'
+    implementation 'com.google.firebase:firebase-firestore:24.4.3'
+    implementation 'com.firebaseui:firebase-ui-firestore:8.0.2'
 
 
-    // FINDBUGS
-    implementation 'com.google.code.findbugs:jsr305:3.0.2'
-
+    //MultiDex
     implementation 'androidx.multidex:multidex:2.0.1'
-    //noinspection GradleCompatible,GradleCompatible
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-    //FACEBOOK
-    implementation 'com.facebook.android:facebook-android-sdk:5.13.0'
 
-    // Import the BoM for the Firebase platform
-    implementation platform('com.google.firebase:firebase-bom:29.1.0')
-
-    // Declare the dependency for the Firebase Authentication library
-    // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-auth'
-
-    // Also declare the dependency for the Google Play services library and specify its version
-    implementation 'com.google.android.gms:play-services-auth:20.4.0'
-
-    //retrofit
+    //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-scalars:2.9.0'
 
+    // Room (for Database)
+    implementation 'androidx.room:room-common:2.4.3'
+    annotationProcessor 'androidx.room:room-compiler:2.4.3'
 
-    // okhttp
-    implementation 'com.squareup.okhttp3:okhttp:3.14.9'
+    // RecyclerView
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
-    //event bus
-    implementation 'org.greenrobot:eventbus:3.0.0'
+    // Material Design
+    implementation 'com.google.android.material:material:1.7.0'
+
 }
 
 

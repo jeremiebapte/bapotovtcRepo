@@ -24,13 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.bapoto.bapoto.R;
 import com.bapoto.bapoto.databinding.ActivityProfileBinding;
 import com.bapoto.bapoto.databinding.ItemReservationBinding;
@@ -55,9 +48,6 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -65,7 +55,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProfileActivity extends AppCompatActivity implements ConversionListener {
 
@@ -76,7 +65,6 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
     private FirebaseFirestore db;
     private ReservationAdapter adapter;
     ItemReservationBinding bindingAdapter;
-    private RequestQueue mRequest;
     private final String URL = "https://fcm.googleapis.com/fcm/send";
 
 
@@ -86,7 +74,6 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
         binding = ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         FirebaseMessaging.getInstance().subscribeToTopic("news");
-        mRequest = Volley.newRequestQueue(this);
         preferenceManager = new PreferenceManager(this);
         init();
         setupListeners();
@@ -153,47 +140,9 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
 
     }
 
-    private void sendNotification() {
-        JSONObject mainObject = new JSONObject();
-        try {
-            mainObject.put("to","topics/"+"news");
-            JSONObject notification  = new JSONObject();
-            notification.put("title", "any title");
-            notification.put("body", "anybody");
-            mainObject.put("notification",notification);
 
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
-                    mainObject,
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
 
-                        }
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            }
-
-            ){
-                @Override
-                public Map<String, String> getHeaders() throws AuthFailureError {
-                    Map<String,String> header = new HashMap<>();
-                    header.put("content-type","application/json");
-                    header.put("authorization","key=AAAAbtstbew:APA91bFYO-JEgRZNHCti1eQN-3Ug0_9aYC30mFqT3dlnuNhzewp0s95xtD3PRmjQy_xDPFBWuflXSt8i15_W4n-srhbbQ_c0XHHofRIsv1dkeNhXY2yMu2OWAzeTjdMTnqaZYex7KepP"
-                    );
-                    return header;
-                }
-            };
-
-            mRequest.add(request);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     private void setupRecyclerView() {
         CollectionReference reservationRef = db.collection(Constants.KEY_COLLECTION_RESERVATIONS);
@@ -314,14 +263,14 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
         alertDialog.show();
     }
 
-    private String encodedImage(Bitmap bitmap) {
+    private void encodedImage(Bitmap bitmap) {
         int previewWidth = 150;
         int previewHeight = bitmap.getHeight() * previewWidth / bitmap.getWidth();
         Bitmap previewBitmap = Bitmap.createScaledBitmap(bitmap, previewWidth, previewHeight, false);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
         byte[] bytes = byteArrayOutputStream.toByteArray();
-        return Base64.encodeToString(bytes, Base64.DEFAULT);
+        Base64.encodeToString(bytes, Base64.DEFAULT);
     }
 
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
@@ -334,7 +283,7 @@ public class ProfileActivity extends AppCompatActivity implements ConversionList
                             InputStream inputStream = getContentResolver().openInputStream(imageUri);
                             Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                             binding.imageProfile.setImageBitmap(bitmap);
-                            String encodedImage = encodedImage(bitmap);
+                            encodedImage(bitmap);
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }

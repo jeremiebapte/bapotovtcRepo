@@ -46,6 +46,7 @@ public class Constants {
     public static final String KEY_IS_FINISHED = "isFinished";
     public static final String KEY_FINISHED_THE = "dayFinished";
     public static final String KEY_PRICE = "price";
+    public static final String SERVER_KEY = "6786402ed7533fda6354442054fbf9698f0c2154";
 
 
     public static HashMap<String, String> remoteMsgHeaders = null;

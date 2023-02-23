@@ -14,11 +14,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
-
-
-
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <TextView
@@ -28,7 +29,7 @@
             android:text="@string/administrateur_bapoto"
             android:textColor="@color/primary_text"
             android:textSize="@dimen/_18ssp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,9 +38,7 @@
             android:text="@string/type_passWord"
             android:textColor="@color/secondary_text"
             android:textSize="@dimen/_12ssp"
-            android:textStyle="bold"/>
-
-
+            android:textStyle="bold" />
 
 
         <EditText
@@ -55,7 +54,7 @@
             android:paddingStart="@dimen/_16sdp"
             android:paddingEnd="@dimen/_16sdp"
             android:textColor="@color/primary_text"
-            android:textSize="@dimen/_13ssp"/>
+            android:textSize="@dimen/_13ssp" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -68,26 +67,18 @@
                 android:id="@+id/buttonSignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_50sdp"
-                android:text="@string/ok"
                 android:layout_gravity="center"
+                android:text="@string/ok"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_13ssp"
                 android:textStyle="bold"
-                app:cornerRadius="@dimen/_8sdp"/>
-
+                app:cornerRadius="@dimen/_8sdp" />
 
 
         </FrameLayout>
 
 
-
-
-
-
-
     </LinearLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
